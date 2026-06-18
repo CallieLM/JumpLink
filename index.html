@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JumpLink Romandie — Show Jumping Community Hub</title>
+  <style>
+    :root {
+      --ink: #10211d;
+      --muted: #5c6f68;
+      --cream: #fff8ea;
+      --sand: #f3dfbf;
+      --sage: #8fae9b;
+      --forest: #183f36;
+      --emerald: #0d6b55;
+      --gold: #d6a83f;
+      --coral: #e7795f;
+      --white: #ffffff;
+      --shadow: 0 24px 70px rgba(16, 33, 29, 0.18);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(214, 168, 63, 0.24), transparent 32rem),
+        radial-gradient(circle at 80% 10%, rgba(143, 174, 155, 0.36), transparent 30rem),
+        linear-gradient(180deg, #fff8ea 0%, #fbf1dc 38%, #f4e6cd 100%);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.055;
+      background-image:
+        linear-gradient(45deg, rgba(24,63,54,.35) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(24,63,54,.35) 25%, transparent 25%);
+      background-size: 6px 6px;
+      z-index: 1;
+      mix-blend-mode: multiply;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 248, 234, 0.76);
+      border-bottom: 1px solid rgba(24, 63, 54, 0.1);
+    }
+
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      font-size: 1.08rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--forest), var(--emerald) 55%, var(--gold));
+      box-shadow: 0 12px 26px rgba(24,63,54,.22);
+      display: grid;
+      place-items: center;
+      color: var(--cream);
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--forest); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(24,63,54,.16);
+      background: rgba(255,255,255,.55);
+      color: var(--forest);
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-size: .86rem;
+      font-weight: 750;
+      box-shadow: 0 10px 30px rgba(24,63,54,.07);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 86px 24px 58px;
+      display: grid;
+      grid-template-columns: 1.06fr .94fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid rgba(24,63,54,.14);
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      color: var(--emerald);
+      font-weight: 800;
+      font-size: .84rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 7px rgba(214,168,63,.15);
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.35rem, 7.6vw, 6.9rem);
+      line-height: .88;
+      letter-spacing: -0.075em;
+      max-width: 790px;
+      color: #10251f;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--emerald);
+      letter-spacing: -0.065em;
+    }
+
+    .lead {
+      margin-top: 26px;
+      max-width: 660px;
+      font-size: 1.16rem;
+      line-height: 1.74;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 15px 22px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--forest), var(--emerald));
+      color: white;
+      box-shadow: 0 18px 40px rgba(24,63,54,.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.62);
+      color: var(--forest);
+      border: 1px solid rgba(24,63,54,.15);
+    }
+
+    .hero-card {
+      min-height: 575px;
+      position: relative;
+      border-radius: 44px;
+      padding: 24px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,255,255,.28)),
+        linear-gradient(180deg, rgba(143,174,155,.28), rgba(214,168,63,.2));
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .arena {
+      position: absolute;
+      inset: 22px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255,255,255,.85), transparent 14rem),
+        linear-gradient(160deg, #1e5145, #0f352d 55%, #0b251f);
+      overflow: hidden;
+    }
+
+    .arena:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 45%, rgba(255,255,255,.08) 46% 48%, transparent 49%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 80px);
+      opacity: .9;
+    }
+
+    .jump-only {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 42%;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #fff8ea 0 14%, var(--gold) 14% 28%, #fff8ea 28% 42%, var(--coral) 42% 56%, #fff8ea 56% 70%, var(--gold) 70% 84%, #fff8ea 84%);
+      box-shadow:
+        0 34px 0 #fff8ea,
+        0 68px 0 rgba(214,168,63,.96),
+        0 102px 0 rgba(255,248,234,.92);
+    }
+
+    .jump-only:before,
+    .jump-only:after {
+      content: "";
+      position: absolute;
+      top: -92px;
+      width: 18px;
+      height: 230px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #fff8ea, #f3dfbf);
+      box-shadow: 0 0 0 7px rgba(255,255,255,.08);
+    }
+
+    .jump-only:before { left: 26px; }
+    .jump-only:after { right: 26px; }
+
+    .mini-panel {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-tile {
+      background: rgba(255,248,234,.92);
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.14);
+    }
+
+    .mini-tile small {
+      display: block;
+      color: var(--muted);
+      font-weight: 750;
+      margin-bottom: 6px;
+    }
+
+    .mini-tile strong {
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+      color: var(--forest);
+    }
+
+    section {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 74px 24px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--emerald);
+      font-size: .76rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.25rem, 4.8vw, 4rem);
+      line-height: .95;
+      letter-spacing: -0.055em;
+      max-width: 760px;
+    }
+
+    .section-note {
+      max-width: 400px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(24,63,54,.1);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: 0 16px 45px rgba(24,63,54,.08);
+    }
+
+    .glass-card .icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: linear-gradient(135deg, rgba(143,174,155,.35), rgba(214,168,63,.32));
+      margin-bottom: 18px;
+      font-size: 1.35rem;
+    }
+
+    .glass-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .glass-card p {
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .solution-band {
+      margin-top: 22px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(24,63,54,.96), rgba(13,107,85,.92)),
+        radial-gradient(circle at 20% 20%, rgba(214,168,63,.5), transparent 30rem);
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      box-shadow: var(--shadow);
+    }
+
+    .solution-copy { padding: 42px; }
+    .solution-copy p {
+      margin-top: 16px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.72;
+      font-size: 1.02rem;
+    }
+
+    .feature-list {
+      padding: 42px;
+      background: rgba(255,255,255,.08);
+      display: grid;
+      gap: 13px;
+    }
+
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.1);
+      color: rgba(255,255,255,.9);
+      font-weight: 750;
+    }
+
+    .feature-row span { color: #ffe1a0; }
+
+    .knowledge {
+      display: grid;
+      grid-template-columns: .84fr 1.16fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .knowledge-visual {
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 20% 25%, rgba(214,168,63,.46), transparent 18rem),
+        linear-gradient(145deg, rgba(24,63,54,.94), rgba(14,75,61,.88));
+      color: white;
+      padding: 34px;
+      min-height: 480px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .knowledge-visual:after {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      right: -180px;
+      bottom: -170px;
+    }
+
+    .knowledge-visual h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.55rem;
+      line-height: .98;
+      letter-spacing: -0.05em;
+      max-width: 360px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .course-map {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 13px;
+      margin-top: 34px;
+    }
+
+    .course-step {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .course-step b {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,.17);
+      color: #ffe1a0;
+    }
+
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .stat-card {
+      min-height: 225px;
+      background: rgba(255,255,255,.64);
+      border: 1px solid rgba(24,63,54,.1);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: 0 16px 45px rgba(24,63,54,.08);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      letter-spacing: -0.05em;
+      color: var(--emerald);
+      margin-bottom: 10px;
+    }
+
+    .stat-card h3 {
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .ecosystem {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .eco-card {
+      padding: 25px;
+      min-height: 235px;
+      border-radius: var(--radius-lg);
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 22px 50px rgba(24,63,54,.14);
+    }
+
+    .eco-card:before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.13);
+      right: -70px;
+      top: -60px;
+    }
+
+    .eco-card:nth-child(1) { background: linear-gradient(145deg, #173f36, #0c7258); }
+    .eco-card:nth-child(2) { background: linear-gradient(145deg, #805527, #d6a83f); }
+    .eco-card:nth-child(3) { background: linear-gradient(145deg, #23483d, #8fae9b); }
+    .eco-card:nth-child(4) { background: linear-gradient(145deg, #8c3f2f, #e7795f); }
+
+    .eco-card .num {
+      display: inline-grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.18);
+      margin-bottom: 24px;
+      font-weight: 900;
+    }
+
+    .eco-card h3 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .eco-card p {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,.78);
+      line-height: 1.62;
+    }
+
+    .forms-wrap {
+      border-radius: 42px;
+      padding: 28px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.28)),
+        radial-gradient(circle at 10% 10%, rgba(214,168,63,.28), transparent 22rem);
+      border: 1px solid rgba(255,255,255,.64);
+      box-shadow: var(--shadow);
+    }
+
+    .forms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .form-card {
+      background: rgba(255,248,234,.76);
+      border: 1px solid rgba(24,63,54,.12);
+      border-radius: 26px;
+      padding: 26px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .form-card h3 {
+      font-size: 1.34rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .form-card p {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .placeholder {
+      margin-top: 22px;
+      border: 1.5px dashed rgba(13,107,85,.34);
+      border-radius: 18px;
+      padding: 15px;
+      color: var(--emerald);
+      font-weight: 850;
+      background: rgba(255,255,255,.45);
+      text-align: center;
+    }
+
+    .demo-panel {
+      border-radius: 38px;
+      background:
+        linear-gradient(135deg, rgba(24,63,54,.96), rgba(13,107,85,.9));
+      color: white;
+      padding: 42px;
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .demo-panel:before {
+      content: "";
+      position: absolute;
+      right: -130px;
+      top: -160px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(214,168,63,.22);
+    }
+
+    .event-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.22);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 20px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(143,174,155,.18);
+      color: var(--forest);
+      font-weight: 800;
+      font-size: .78rem;
+    }
+
+    .event-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 13px;
+      border-radius: 18px;
+      background: rgba(243,223,191,.34);
+    }
+
+    .date-box {
+      background: var(--forest);
+      color: white;
+      border-radius: 15px;
+      padding: 10px;
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .date-box small {
+      display: block;
+      font-size: .72rem;
+      opacity: .82;
+      margin-bottom: 4px;
+    }
+
+    .demo-copy {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .demo-copy p {
+      color: rgba(255,255,255,.78);
+      line-height: 1.72;
+      margin-top: 16px;
+    }
+
+    .source-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.78);
+      line-height: 1.55;
+      font-size: .92rem;
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      padding: 44px 24px 64px;
+    }
+
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      border-top: 1px solid rgba(24,63,54,.12);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .problem-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 920px) {
+      .nav-links { display: none; }
+      .hero,
+      .solution-band,
+      .knowledge,
+      .demo-panel {
+        grid-template-columns: 1fr;
+      }
+      .forms-grid,
+      .ecosystem {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-card { min-height: 500px; }
+    }
+
+    @media (max-width: 620px) {
+      .problem-grid,
+      .knowledge-grid,
+      .forms-grid,
+      .ecosystem {
+        grid-template-columns: 1fr;
+      }
+      .section-head { display: block; }
+      .section-note { margin-top: 18px; }
+      .hero { padding-top: 56px; }
+      h1 { font-size: 3.3rem; }
+      .mini-panel { grid-template-columns: 1fr; }
+      .hero-card { min-height: 560px; }
+      .solution-copy,
+      .feature-list,
+      .demo-panel {
+        padding: 28px;
+      }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header>
+    <nav class="nav">
+      <a href="#" class="brand" aria-label="JumpLink Romandie home">
+        <span class="brand-mark">♞</span>
+        <span>JumpLink Romandie</span>
+      </a>
+      <div class="nav-links" aria-label="Main navigation">
+        <a href="#about">Problem & Solution</a>
+        <a href="#knowledge">Show Jumping 101</a>
+        <a href="#community">Community</a>
+        <a href="#forms">Forms</a>
+      </div>
+      <a class="pill" href="#forms">View forms</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span> Suisse Romande · Show jumping · Community</div>
+        <h1>The equestrian hub of <em>Romandie.</em></h1>
+        <p class="lead">
+          A digital platform designed to reunite riders, organizers, volunteers, sponsors and fans around
+          show jumping events in French-speaking Switzerland.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#about">Explore the concept</a>
+          <a class="btn btn-secondary" href="#forms">View forms</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Illustration of show jumping community platform">
+        <div class="arena">
+          <div class="jump-only"></div>
+          <div class="mini-panel">
+            <div class="mini-tile">
+              <small>Volunteers</small>
+              <strong>Sign-up!</strong>
+            </div>
+            <div class="mini-tile">
+              <small>Sponsors</small>
+              <strong>Get in touch!</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Problem & Solution</div>
+          <h2>The sport is active, but the community feels scattered.</h2>
+        </div>
+        <p class="section-note">
+          FER represents equestrian sport in Suisse Romande, while Swiss Equestrian provides national sport
+          calendars and event information. JumpLink builds a bridge between official event data and everyday community needs.
+        </p>
+      </div>
+
+      <div class="problem-grid">
+        <article class="glass-card">
+          <div class="icon">📅</div>
+          <h3>Fragmented information</h3>
+          <p>
+            Riders and fans often search across calendars, stable pages, social media posts and word of mouth to know what is happening.
+          </p>
+        </article>
+        <article class="glass-card">
+          <div class="icon">🤝</div>
+          <h3>Volunteer shortage</h3>
+          <p>
+            Horse shows need people for parking, bar, paddock, course crew, timing and hospitality, but recruitment is rarely centralized.
+          </p>
+        </article>
+        <article class="glass-card">
+          <div class="icon">✨</div>
+          <h3>Community energy</h3>
+          <p>
+            Parties, food stands and social evenings make events memorable, but this information is often hard to find before attending.
+          </p>
+        </article>
+        <article class="glass-card">
+          <div class="icon">🔎</div>
+          <h3>Mysterious sport</h3>
+          <p>
+            Show jumping has its own rhythm, codes and vocabulary. To newcomers, it can feel like a closed world; JumpLink makes it more welcoming, readable and easy to join.
+          </p>
+        </article>
+      </div>
+
+      <div class="solution-band">
+        <div class="solution-copy">
+          <div class="kicker" style="color:#ffe1a0;">The solution</div>
+          <h2>A community-first event platform.</h2>
+          <p>
+            JumpLink Romandie collects show jumping events, presents them beautifully, and adds the missing layers:
+            volunteer sign-ups, sponsor introductions, social details and organizer visibility.
+          </p>
+        </div>
+        <div class="feature-list">
+          <div class="feature-row"><span>01</span> Event calendar</div>
+          <div class="feature-row"><span>02</span> Stables and organizers in Suisse Romande</div>
+          <div class="feature-row"><span>03</span> Become an active part of the community</div>
+          <div class="feature-row"><span>04</span> Party, food, bar and community atmosphere information</div>
+          <div class="feature-row"><span>05</span> AI-assisted event summaries and clearer communication</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="knowledge">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Show Jumping 101</div>
+          <h2>Basic knowledge for newcomers.</h2>
+        </div>
+        <p class="section-note">
+          The platform should also educate new people entering the sport, so they feel comfortable helping or attending.
+        </p>
+      </div>
+
+      <div class="knowledge">
+        <aside class="knowledge-visual">
+          <div>
+            <h3>What happens during a jumping show?</h3>
+            <div class="course-map">
+              <div class="course-step"><b>1</b><span>Riders walk the course and memorize the track.</span></div>
+              <div class="course-step"><b>2</b><span>Horse and rider warm up in a separate ring, called "training ring", then enter the arena to complete the course.</span></div>
+              <div class="course-step"><b>3</b><span>Penalties are given for rails down, refusals or time faults.</span></div>
+              <div class="course-step"><b>4</b><span>Clear rounds and fast pace create excitement for the audience.</span></div>
+            </div>
+          </div>
+          <div class="source-note">
+            Education content can be expanded at a later time.
+          </div>
+        </aside>
+
+        <div class="knowledge-grid">
+          <article class="stat-card">
+            <strong>CS</strong>
+            <h3>Concours de Saut</h3>
+            <p>
+              In Switzerland, show jumping competitions are often marked as “CS”. They can include regional
+              or national classes depending on the organizer and level.
+            </p>
+          </article>
+          <article class="stat-card">
+            <strong>R / N</strong>
+            <h3>Competition levels</h3>
+            <p>
+              Regional and national categories help structure the sport. In Romandie, FER also supports championships,
+              tours and cups across different categories.
+            </p>
+          </article>
+          <article class="stat-card">
+            <strong>4 pts</strong>
+            <h3>Common penalty</h3>
+            <p>
+              A rail knocked down or a refusal commonly adds faults. This makes the sport easy to follow: clear,
+              accurate and fast rounds are rewarded.
+            </p>
+          </article>
+          <article class="stat-card">
+            <strong>Team</strong>
+            <h3>Behind the scenes</h3>
+            <p>
+              Every show depends on volunteers, sponsors, course builders, stewards, judges, riders, grooms and families.
+              JumpLink makes that invisible ecosystem visible.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Platform ecosystem</div>
+          <h2>Designed for every person around the arena.</h2>
+        </div>
+        <p class="section-note">
+          The website is not only a calendar. It is a bridge between sport, organization, social life and local support.
+        </p>
+      </div>
+
+      <div class="ecosystem">
+        <article class="eco-card">
+          <div class="num">01</div>
+          <h3>Riders & families</h3>
+          <p>Find upcoming shows, locations, schedules, practical details and the social atmosphere around the event.</p>
+        </article>
+        <article class="eco-card">
+          <div class="num">02</div>
+          <h3>Volunteers</h3>
+          <p>Apply to help with clear roles, time slots and expectations before arriving on site.</p>
+        </article>
+        <article class="eco-card">
+          <div class="num">03</div>
+          <h3>Sponsors</h3>
+          <p>Discover local events to support and connect with organizers through a structured inquiry form.</p>
+        </article>
+        <article class="eco-card">
+          <div class="num">04</div>
+          <h3>Organizers</h3>
+          <p>Increase visibility, recruit help, promote sponsors and make each show feel like a community moment.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="forms">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Google Form placeholders</div>
+          <h2>Ready to connect people once the forms are live.</h2>
+        </div>
+        <p class="section-note">
+          These cards are placeholders for now. Later, each button can link to a Google Form.
+        </p>
+      </div>
+
+      <div class="forms-wrap">
+        <div class="forms-grid">
+          <article class="form-card">
+            <div>
+              <h3>Volunteer application</h3>
+              <p>
+                For people who want to help at an event: availability, preferred role, experience, canton and contact details.
+              </p>
+            </div>
+            <div class="placeholder">Google Form link coming soon</div>
+          </article>
+          <article class="form-card">
+            <div>
+              <h3>Sponsor inquiry</h3>
+              <p>
+                For brands, local businesses and private sponsors interested in visibility, hospitality or prize support.
+              </p>
+            </div>
+            <div class="placeholder">Sponsor form coming soon</div>
+          </article>
+          <article class="form-card">
+            <div>
+              <h3>Organizer submission</h3>
+              <p>
+                For stables and clubs to submit event details, party information, volunteer needs and sponsor packages.
+              </p>
+            </div>
+            <div class="placeholder">Organizer form coming soon</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="demo-panel">
+        <div class="event-card">
+          <p class="pill" style="display:inline-flex;">Prototype event card</p>
+          <div class="tag-row">
+            <span class="tag">Suisse Romande</span>
+            <span class="tag">Show jumping</span>
+            <span class="tag">Party info</span>
+            <span class="tag">Needs volunteers</span>
+          </div>
+          <div class="event-list">
+            <div class="event-item">
+              <div class="date-box"><small>JUN</small>21</div>
+              <div>
+                <strong>CS Romandie — Example Stable</strong>
+                <p style="color: var(--muted); margin-top: 4px;">Bar open · DJ evening · sponsor packages available</p>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="date-box"><small>JUL</small>06</div>
+              <div>
+                <strong>Regional Jumping — Placeholder Club</strong>
+                <p style="color: var(--muted); margin-top: 4px;">Course crew needed · food trucks · family day</p>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="date-box"><small>AUG</small>18</div>
+              <div>
+                <strong>Summer Show — Placeholder Organizer</strong>
+                <p style="color: var(--muted); margin-top: 4px;">Volunteer sign-up open · evening party to confirm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-copy">
+          <div class="kicker" style="color:#ffe1a0;">Live demo idea</div>
+          <h2>From “Where is the next show?” to “How can I help?”</h2>
+          <p>
+            The final website could show real upcoming CS events from official calendars, then enrich each listing with
+            community information that official sport calendars do not always centralize: volunteer needs, sponsor
+            opportunities and social activities.
+          </p>
+          <div class="source-note">
+            Source inspiration: FER is the official Fédération Equestre Romande and Swiss Equestrian is the national umbrella
+            body for equestrian sport in Switzerland, with sport calendars and event information.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p><strong>JumpLink Romandie</strong> · A GEN AI class prototype</p>
+      <p>No personal email displayed · Form links to be added later</p>
+    </div>
+  </footer>
+</body>
+</html>
