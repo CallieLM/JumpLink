@@ -632,6 +632,27 @@
       text-align: center;
     }
 
+    .form-button {
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 15px 22px;
+      background: linear-gradient(135deg, var(--forest), var(--emerald));
+      color: white;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      box-shadow: 0 18px 40px rgba(24,63,54,.24);
+      transition: transform .2s ease, box-shadow .2s ease;
+      text-align: center;
+    }
+
+    .form-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 48px rgba(24,63,54,.3);
+    }
+
     .demo-panel {
       border-radius: 38px;
       background:
@@ -740,6 +761,99 @@
       font-size: .92rem;
     }
 
+
+    .real-events-panel {
+      grid-template-columns: 1.35fr .65fr;
+      align-items: stretch;
+    }
+
+    .real-event-card {
+      max-height: 720px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-table-head {
+      display: grid;
+      grid-template-columns: 118px 1.05fr 1.35fr .8fr .9fr;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--forest);
+      color: white;
+      font-size: .74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 10px;
+    }
+
+    .real-event-list {
+      display: grid;
+      gap: 9px;
+      overflow: auto;
+      padding-right: 5px;
+      scrollbar-width: thin;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 118px 1.05fr 1.35fr .8fr .9fr;
+      gap: 10px;
+      align-items: stretch;
+      padding: 11px 12px;
+      border-radius: 16px;
+      background: rgba(243,223,191,.36);
+      border: 1px solid rgba(24,63,54,.08);
+      font-size: .84rem;
+    }
+
+    .event-date {
+      font-weight: 900;
+      color: var(--forest);
+      white-space: nowrap;
+    }
+
+    .event-main strong {
+      display: block;
+      letter-spacing: -0.02em;
+      margin-bottom: 3px;
+    }
+
+    .event-main span {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(143,174,155,.23);
+      color: var(--forest);
+      font-weight: 850;
+      font-size: .72rem;
+    }
+
+    .event-type {
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .event-fill {
+      min-height: 34px;
+      border: 1.5px dashed rgba(13,107,85,.24);
+      border-radius: 12px;
+      background: rgba(255,255,255,.35);
+      color: rgba(13,107,85,.72);
+      padding: 8px;
+      line-height: 1.25;
+    }
+
+    .event-fill em {
+      font-style: normal;
+      font-weight: 800;
+      font-size: .76rem;
+    }
+
+
     footer {
       position: relative;
       z-index: 2;
@@ -797,6 +911,23 @@
       .demo-panel {
         padding: 28px;
       }
+
+      .real-events-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .event-table-head {
+        display: none;
+      }
+
+      .event-row {
+        grid-template-columns: 1fr;
+      }
+
+      .real-event-card {
+        max-height: 760px;
+      }
+
       .footer-inner { flex-direction: column; }
     }
   </style>
@@ -1034,7 +1165,7 @@
                 For people who want to help at an event: availability, preferred role, experience, canton and contact details.
               </p>
             </div>
-            <div class="placeholder">Google Form link coming soon</div>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeCeAcnUHSXdtz3XlxjxGvJsViFv7zXL3c7u9tLRI9tWwPlIQ/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Join the team!</a>
           </article>
           <article class="form-card">
             <div>
@@ -1043,7 +1174,7 @@
                 For brands, local businesses and private sponsors interested in visibility, hospitality or prize support.
               </p>
             </div>
-            <div class="placeholder">Sponsor form coming soon</div>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScDOmRIpiF-q-GCFRRvg-z3T0cUDJckjnC_yz8ML0i4ChScVA/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Join the team!</a>
           </article>
           <article class="form-card">
             <div>
@@ -1059,51 +1190,408 @@
     </section>
 
     <section id="demo">
-      <div class="demo-panel">
-        <div class="event-card">
-          <p class="pill" style="display:inline-flex;">Prototype event card</p>
+      <div class="demo-panel real-events-panel">
+        <div class="event-card real-event-card">
+          <p class="pill" style="display:inline-flex;">Event list prototype</p>
           <div class="tag-row">
             <span class="tag">Suisse Romande</span>
             <span class="tag">Show jumping</span>
-            <span class="tag">Party info</span>
-            <span class="tag">Needs volunteers</span>
+            <span class="tag">2026 calendar</span>
+            <span class="tag">To be completed</span>
           </div>
-          <div class="event-list">
-            <div class="event-item">
-              <div class="date-box"><small>JUN</small>21</div>
-              <div>
-                <strong>CS Romandie — Example Stable</strong>
-                <p style="color: var(--muted); margin-top: 4px;">Bar open · DJ evening · sponsor packages available</p>
+
+          <div class="event-table-head">
+            <span>Date</span>
+            <span>Place</span>
+            <span>Event type</span>
+            <span>Party info</span>
+            <span>Volunteer needed</span>
+          </div>
+
+          <div class="real-event-list">
+
+              <div class="event-row">
+                <div class="event-date">28-31.05.2026</div>
+                <div class="event-main">
+                  <strong>Crête - Vandoeuvres</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">Qualifying stage for the Swiss Elite Jumping Championship series</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
               </div>
-            </div>
-            <div class="event-item">
-              <div class="date-box"><small>JUL</small>06</div>
-              <div>
-                <strong>Regional Jumping — Placeholder Club</strong>
-                <p style="color: var(--muted); margin-top: 4px;">Course crew needed · food trucks · family day</p>
+              <div class="event-row">
+                <div class="event-date">04-07.06.2026</div>
+                <div class="event-main">
+                  <strong>Crête - Vandoeuvres</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">Geneva National Championship</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
               </div>
-            </div>
-            <div class="event-item">
-              <div class="date-box"><small>AUG</small>18</div>
-              <div>
-                <strong>Summer Show — Placeholder Organizer</strong>
-                <p style="color: var(--muted); margin-top: 4px;">Volunteer sign-up open · evening party to confirm</p>
+              <div class="event-row">
+                <div class="event-date">12–14.06.2026</div>
+                <div class="event-main">
+                  <strong>Estavayer-le-Lac</strong>
+                  <span>FR</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
               </div>
-            </div>
+              <div class="event-row">
+                <div class="event-date">18–21.06.2026</div>
+                <div class="event-main">
+                  <strong>Payerne</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">19–21.06.2026</div>
+                <div class="event-main">
+                  <strong>Signy</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">21–22.06.2026</div>
+                <div class="event-main">
+                  <strong>Corcelles</strong>
+                  <span>NE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">28.06.2026</div>
+                <div class="event-main">
+                  <strong>Corcelles</strong>
+                  <span>NE</span>
+                </div>
+                <div class="event-type">Qualifying stage for the Swiss Elite Jumping Championship series</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">03-05.07.2026</div>
+                <div class="event-main">
+                  <strong>Apples</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">04-05.07.2026</div>
+                <div class="event-main">
+                  <strong>La Chaux-de-Fonds</strong>
+                  <span>NE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">10-12.07.2026</div>
+                <div class="event-main">
+                  <strong>Chalet-à-Gobet</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">10-12.07.2026</div>
+                <div class="event-main">
+                  <strong>Lignières</strong>
+                  <span>NE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">10-12.07.2026</div>
+                <div class="event-main">
+                  <strong>Jussy</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">17-19.07.2026</div>
+                <div class="event-main">
+                  <strong>Yverdon-les-Bains</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">22.07-02.08.2026</div>
+                <div class="event-main">
+                  <strong>Chalet-à-Gobet</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">Swiss Championships</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">07–09.08.2026</div>
+                <div class="event-main">
+                  <strong>Avully</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">Romand Regional and National Championship.</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">14-16.08.2026</div>
+                <div class="event-main">
+                  <strong>Saignelégier</strong>
+                  <span>JU</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">15-16.08.2026</div>
+                <div class="event-main">
+                  <strong>Dompierre</strong>
+                  <span>FR</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">20-23.08.2026</div>
+                <div class="event-main">
+                  <strong>La Chaux-de-Fonds</strong>
+                  <span>NE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">21-23.08.2026</div>
+                <div class="event-main">
+                  <strong>Poliez-le-Grand</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">28-30.08.2026</div>
+                <div class="event-main">
+                  <strong>Bassin</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">05-06.09.2026</div>
+                <div class="event-main">
+                  <strong>Lausanne</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">05-06.09.2026</div>
+                <div class="event-main">
+                  <strong>Plaffeien</strong>
+                  <span>FR</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">09-13.09.2026</div>
+                <div class="event-main">
+                  <strong>Sion</strong>
+                  <span>VS</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">10.09.2026</div>
+                <div class="event-main">
+                  <strong>Vandoeuvres</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">17-20.09.2026</div>
+                <div class="event-main">
+                  <strong>Avenches</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">Swiss Championships for Young Horses</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">18-20.09.2026</div>
+                <div class="event-main">
+                  <strong>Vandoeuvres</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">19-21.09.2026</div>
+                <div class="event-main">
+                  <strong>Yverdon-les-Bains</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">15-27.09.2026</div>
+                <div class="event-main">
+                  <strong>Vandoeuvres</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">02-04.10.2026</div>
+                <div class="event-main">
+                  <strong>Dompierre</strong>
+                  <span>FR</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">03-04.10.2026</div>
+                <div class="event-main">
+                  <strong>Yverdon-les-Bains</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">09-11.10.2026</div>
+                <div class="event-main">
+                  <strong>Russin</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">10-11.10.2026</div>
+                <div class="event-main">
+                  <strong>Malapalud</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">16-18.10.2026</div>
+                <div class="event-main">
+                  <strong>Russin</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">24-25.10.2026</div>
+                <div class="event-main">
+                  <strong>Yverdon-les-Bains</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">31.10-01.11.2026</div>
+                <div class="event-main">
+                  <strong>Yverdon-les-Bains</strong>
+                  <span>VD</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">14.11.2026</div>
+                <div class="event-main">
+                  <strong>Corminboeuf</strong>
+                  <span>FR</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
+              <div class="event-row">
+                <div class="event-date">09-12.12.2026</div>
+                <div class="event-main">
+                  <strong>Genève</strong>
+                  <span>GE</span>
+                </div>
+                <div class="event-type">&nbsp;</div>
+                <div class="event-fill"><em>Party info:</em></div>
+                <div class="event-fill"><em>Volunteer needed:</em></div>
+              </div>
           </div>
         </div>
 
         <div class="demo-copy">
           <div class="kicker" style="color:#ffe1a0;">Live demo idea</div>
-          <h2>From “Where is the next show?” to “How can I help?”</h2>
+          <h2>A real event list, ready to be enriched by the community.</h2>
           <p>
-            The final website could show real upcoming CS events from official calendars, then enrich each listing with
-            community information that official sport calendars do not always centralize: volunteer needs, sponsor
-            opportunities and social activities.
+            This prototype uses the calendar information from the list and leaves space for the details that are usually missing:
+            party information and the type of volunteers needed. These fields can be filled in later by organizers.
           </p>
           <div class="source-note">
-            Source inspiration: FER is the official Fédération Equestre Romande and Swiss Equestrian is the national umbrella
-            body for equestrian sport in Switzerland, with sport calendars and event information.
+            The goal is to keep the official event information clear, while adding community details that make each show easier to discover, support and attend.
           </div>
         </div>
       </div>
