@@ -6,35 +6,523 @@
   <title>JumpLink Romandie — Show Jumping Community Hub</title>
   <style>
     :root {
-      --ink: #10211d;
-      --muted: #5c6f68;
-      --cream: #fff8ea;
-      --sand: #f3dfbf;
-      --sage: #8fae9b;
-      --forest: #183f36;
-      --emerald: #0d6b55;
-      --gold: #d6a83f;
-      --coral: #e7795f;
-      --white: #ffffff;
-      --shadow: 0 24px 70px rgba(16, 33, 29, 0.18);
-      --radius-xl: 32px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --max: 1180px;
+      --ink: #10211d; --muted: #5c6f68; --cream: #fff8ea; --sand: #f3dfbf;
+      --sage: #8fae9b; --forest: #183f36; --emerald: #0d6b55; --gold: #d6a83f;
+      --coral: #e7795f; --white: #ffffff;
+      --shadow: 0 24px 70px rgba(16,33,29,.18);
+      --radius-xl: 32px; --radius-lg: 22px; --radius-md: 16px; --max: 1180px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(214, 168, 63, 0.24), transparent 32rem),
-        radial-gradient(circle at 80% 10%, rgba(143, 174, 155, 0.36), transparent 30rem),
+        radial-gradient(circle at top left, rgba(214,168,63,.24), transparent 32rem),
+        radial-gradient(circle at 80% 10%, rgba(143,174,155,.36), transparent 30rem),
         linear-gradient(180deg, #fff8ea 0%, #fbf1dc 38%, #f4e6cd 100%);
       overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    .noise { position: fixed; inset: 0; pointer-events: none; opacity: .055; background-image: linear-gradient(45deg, rgba(24,63,54,.35) 25%, transparent 25%), linear-gradient(-45deg, rgba(24,63,54,.35) 25%, transparent 25%); background-size: 6px 6px; z-index: 1; mix-blend-mode: multiply; }
+    header { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(18px); background: rgba(255,248,234,.76); border-bottom: 1px solid rgba(24,63,54,.1); }
+    .nav { max-width: var(--max); margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 850; letter-spacing: -.04em; font-size: 1.08rem; }
+    .brand-mark { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--forest), var(--emerald) 55%, var(--gold)); box-shadow: 0 12px 26px rgba(24,63,54,.22); display: grid; place-items: center; color: var(--cream); font-size: 1.2rem; }
+    .nav-links { display: flex; align-items: center; gap: 22px; font-size: .92rem; color: var(--muted); font-weight: 650; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--forest); }
+    .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(24,63,54,.16); background: rgba(255,255,255,.55); color: var(--forest); border-radius: 999px; padding: 10px 15px; font-size: .86rem; font-weight: 750; box-shadow: 0 10px 30px rgba(24,63,54,.07); }
+    .hero { position: relative; z-index: 2; max-width: var(--max); margin: 0 auto; padding: 86px 24px 58px; display: grid; grid-template-columns: 1.06fr .94fr; gap: 46px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border: 1px solid rgba(24,63,54,.14); border-radius: 999px; background: rgba(255,255,255,.62); color: var(--emerald); font-weight: 800; font-size: .84rem; margin-bottom: 22px; }
+    .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 7px rgba(214,168,63,.15); }
+    h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.35rem, 7.6vw, 6.9rem); line-height: .88; letter-spacing: -.075em; max-width: 790px; color: #10251f; }
+    .hero h1 em { font-style: italic; color: var(--emerald); letter-spacing: -.065em; }
+    .lead { margin-top: 26px; max-width: 660px; font-size: 1.16rem; line-height: 1.74; color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .btn { border: none; border-radius: 999px; padding: 15px 22px; font-weight: 850; letter-spacing: -.01em; cursor: pointer; transition: transform .2s, box-shadow .2s; display: inline-flex; align-items: center; gap: 10px; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--forest), var(--emerald)); color: white; box-shadow: 0 18px 40px rgba(24,63,54,.28); }
+    .btn-secondary { background: rgba(255,255,255,.62); color: var(--forest); border: 1px solid rgba(24,63,54,.15); }
+    .hero-card { min-height: 575px; position: relative; border-radius: 44px; padding: 24px; background: linear-gradient(145deg, rgba(255,255,255,.72), rgba(255,255,255,.28)), linear-gradient(180deg, rgba(143,174,155,.28), rgba(214,168,63,.2)); border: 1px solid rgba(255,255,255,.65); box-shadow: var(--shadow); overflow: hidden; }
+    .arena { position: absolute; inset: 22px; border-radius: 34px; background: radial-gradient(circle at 20% 18%, rgba(255,255,255,.85), transparent 14rem), linear-gradient(160deg, #1e5145, #0f352d 55%, #0b251f); overflow: hidden; }
+    .arena:before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 0 45%, rgba(255,255,255,.08) 46% 48%, transparent 49%), repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 80px); opacity: .9; }
+    .jump-only { position: absolute; left: 12%; right: 12%; top: 42%; height: 12px; border-radius: 999px; background: linear-gradient(90deg, #fff8ea 0 14%, var(--gold) 14% 28%, #fff8ea 28% 42%, var(--coral) 42% 56%, #fff8ea 56% 70%, var(--gold) 70% 84%, #fff8ea 84%); box-shadow: 0 34px 0 #fff8ea, 0 68px 0 rgba(214,168,63,.96), 0 102px 0 rgba(255,248,234,.92); }
+    .jump-only:before, .jump-only:after { content: ""; position: absolute; top: -92px; width: 18px; height: 230px; border-radius: 999px; background: linear-gradient(180deg, #fff8ea, #f3dfbf); box-shadow: 0 0 0 7px rgba(255,255,255,.08); }
+    .jump-only:before { left: 26px; } .jump-only:after { right: 26px; }
+    .mini-panel { position: absolute; left: 32px; right: 32px; bottom: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mini-tile { background: rgba(255,248,234,.92); border: 1px solid rgba(255,255,255,.75); border-radius: 20px; padding: 18px; box-shadow: 0 18px 40px rgba(0,0,0,.14); }
+    .mini-tile small { display: block; color: var(--muted); font-weight: 750; margin-bottom: 6px; }
+    .mini-tile strong { font-size: 1.2rem; letter-spacing: -.03em; color: var(--forest); }
+    section { position: relative; z-index: 2; max-width: var(--max); margin: 0 auto; padding: 74px 24px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; }
+    .kicker { text-transform: uppercase; letter-spacing: .18em; color: var(--emerald); font-size: .76rem; font-weight: 900; margin-bottom: 12px; }
+    h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.25rem, 4.8vw, 4rem); line-height: .95; letter-spacing: -.055em; max-width: 760px; }
+    .section-note { max-width: 400px; color: var(--muted); line-height: 1.7; }
+    .problem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .glass-card { background: rgba(255,255,255,.62); border: 1px solid rgba(24,63,54,.1); border-radius: var(--radius-lg); padding: 26px; box-shadow: 0 16px 45px rgba(24,63,54,.08); }
+    .glass-card .icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 17px; background: linear-gradient(135deg, rgba(143,174,155,.35), rgba(214,168,63,.32)); margin-bottom: 18px; font-size: 1.35rem; }
+    .glass-card h3 { font-size: 1.18rem; margin-bottom: 10px; letter-spacing: -.03em; }
+    .glass-card p { color: var(--muted); line-height: 1.68; }
+    .solution-band { margin-top: 22px; border-radius: var(--radius-xl); overflow: hidden; background: linear-gradient(135deg, rgba(24,63,54,.96), rgba(13,107,85,.92)), radial-gradient(circle at 20% 20%, rgba(214,168,63,.5), transparent 30rem); color: white; display: grid; grid-template-columns: 1fr 1fr; box-shadow: var(--shadow); }
+    .solution-copy { padding: 42px; }
+    .solution-copy p { margin-top: 16px; color: rgba(255,255,255,.78); line-height: 1.72; font-size: 1.02rem; }
+    .feature-list { padding: 42px; background: rgba(255,255,255,.08); display: grid; gap: 13px; }
+    .feature-row { display: flex; align-items: center; gap: 14px; padding: 15px; border-radius: 18px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.9); font-weight: 750; }
+    .feature-row span { color: #ffe1a0; }
+    .knowledge { display: grid; grid-template-columns: .84fr 1.16fr; gap: 22px; align-items: stretch; }
+    .knowledge-visual { border-radius: var(--radius-xl); background: radial-gradient(circle at 20% 25%, rgba(214,168,63,.46), transparent 18rem), linear-gradient(145deg, rgba(24,63,54,.94), rgba(14,75,61,.88)); color: white; padding: 34px; min-height: 480px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
+    .knowledge-visual:after { content: ""; position: absolute; width: 480px; height: 480px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; right: -180px; bottom: -170px; }
+    .knowledge-visual h3 { font-family: Georgia, "Times New Roman", serif; font-size: 2.55rem; line-height: .98; letter-spacing: -.05em; max-width: 360px; position: relative; z-index: 1; }
+    .course-map { position: relative; z-index: 1; display: grid; gap: 13px; margin-top: 34px; }
+    .course-step { display: flex; gap: 14px; align-items: center; padding: 14px; border: 1px solid rgba(255,255,255,.13); border-radius: 18px; background: rgba(255,255,255,.08); }
+    .course-step b { width: 36px; height: 36px; flex: 0 0 36px; display: grid; place-items: center; border-radius: 12px; background: rgba(255,255,255,.17); color: #ffe1a0; }
+    .knowledge-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .stat-card { min-height: 225px; background: rgba(255,255,255,.64); border: 1px solid rgba(24,63,54,.1); border-radius: var(--radius-lg); padding: 26px; box-shadow: 0 16px 45px rgba(24,63,54,.08); }
+    .stat-card strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; letter-spacing: -.05em; color: var(--emerald); margin-bottom: 10px; }
+    .stat-card h3 { margin-bottom: 10px; letter-spacing: -.03em; }
+    .stat-card p { color: var(--muted); line-height: 1.65; }
+    .ecosystem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .eco-card { padding: 25px; min-height: 235px; border-radius: var(--radius-lg); color: white; position: relative; overflow: hidden; box-shadow: 0 22px 50px rgba(24,63,54,.14); }
+    .eco-card:before { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,.13); right: -70px; top: -60px; }
+    .eco-card:nth-child(1) { background: linear-gradient(145deg, #173f36, #0c7258); }
+    .eco-card:nth-child(2) { background: linear-gradient(145deg, #805527, #d6a83f); }
+    .eco-card:nth-child(3) { background: linear-gradient(145deg, #23483d, #8fae9b); }
+    .eco-card:nth-child(4) { background: linear-gradient(145deg, #8c3f2f, #e7795f); }
+    .eco-card .num { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: rgba(255,255,255,.18); margin-bottom: 24px; font-weight: 900; }
+    .eco-card h3 { position: relative; z-index: 1; margin-bottom: 10px; font-size: 1.2rem; letter-spacing: -.03em; }
+    .eco-card p { position: relative; z-index: 1; color: rgba(255,255,255,.78); line-height: 1.62; }
+    .forms-wrap { border-radius: 42px; padding: 28px; background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.28)), radial-gradient(circle at 10% 10%, rgba(214,168,63,.28), transparent 22rem); border: 1px solid rgba(255,255,255,.64); box-shadow: var(--shadow); }
+    .forms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .form-card { background: rgba(255,248,234,.76); border: 1px solid rgba(24,63,54,.12); border-radius: 26px; padding: 26px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; }
+    .form-card h3 { font-size: 1.34rem; letter-spacing: -.04em; margin-bottom: 12px; }
+    .form-card p { color: var(--muted); line-height: 1.65; }
+    .form-button { margin-top: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 15px 22px; background: linear-gradient(135deg, var(--forest), var(--emerald)); color: white; font-weight: 850; letter-spacing: -.01em; box-shadow: 0 18px 40px rgba(24,63,54,.24); transition: transform .2s, box-shadow .2s; text-align: center; }
+    .form-button:hover { transform: translateY(-2px); box-shadow: 0 22px 48px rgba(24,63,54,.3); }
+
+    /* MAP */
+    .map-wrap { border-radius: var(--radius-xl); overflow: hidden; background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.28)), radial-gradient(circle at 10% 10%, rgba(143,174,155,.28), transparent 22rem); border: 1px solid rgba(255,255,255,.64); box-shadow: var(--shadow); padding: 28px; margin-bottom: 28px; }
+    #ch-svg { display: block; width: 100%; height: auto; border-radius: var(--radius-lg); background: #f6f4ee; border: 1px solid rgba(24,63,54,.08); }
+    .canton-path { stroke: #fff; stroke-width: 1; transition: fill .15s; }
+    .canton-path.romande { fill: #cdeadd; }
+    .canton-path.other { fill: #e4ece8; }
+    .canton-path:hover { fill: #9FE1CB; }
+    .map-pin { cursor: pointer; }
+    .map-loading { font-family: Inter, sans-serif; font-size: 14px; fill: #5c6f68; }
+    .map-legend { display: flex; align-items: center; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+    .map-legend-item { display: flex; align-items: center; gap: 8px; font-size: .82rem; color: var(--muted); font-weight: 650; }
+    .map-legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; }
+    #map-popup:empty { display: none; }
+    #map-popup { margin-top: 16px; }
+    .popup-card { background: rgba(255,248,234,.96); border: 1px solid rgba(24,63,54,.12); border-radius: var(--radius-lg); padding: 22px; position: relative; }
+    .popup-close { position: absolute; top: 16px; right: 18px; background: none; border: none; font-size: 1.3rem; color: var(--muted); cursor: pointer; line-height: 1; padding: 0; }
+    .popup-close:hover { color: var(--ink); }
+    .popup-place { font-family: Georgia, serif; font-size: 1.4rem; letter-spacing: -.04em; color: var(--forest); margin-bottom: 2px; }
+    .popup-count { font-size: .82rem; color: var(--muted); margin-bottom: 14px; }
+    .popup-events { display: grid; gap: 9px; }
+    .popup-row { background: rgba(255,255,255,.75); border: 1px solid rgba(24,63,54,.08); border-radius: 13px; padding: 11px 14px; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+    .popup-date-box { background: var(--forest); color: white; border-radius: 10px; padding: 8px 10px; text-align: center; font-weight: 900; font-size: .75rem; line-height: 1.3; white-space: nowrap; }
+    .popup-type { font-size: .88rem; font-weight: 750; color: var(--ink); margin-bottom: 4px; }
+    .popup-badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: .7rem; font-weight: 800; background: rgba(143,174,155,.22); color: var(--forest); }
+    .popup-badge.named { background: rgba(231,121,95,.16); color: #8c3f2f; }
+
+    .demo-panel { border-radius: 38px; background: linear-gradient(135deg, rgba(24,63,54,.96), rgba(13,107,85,.9)); color: white; padding: 42px; display: grid; grid-template-columns: .95fr 1.05fr; gap: 28px; box-shadow: var(--shadow); overflow: hidden; position: relative; }
+    .demo-panel:before { content: ""; position: absolute; right: -130px; top: -160px; width: 420px; height: 420px; border-radius: 50%; background: rgba(214,168,63,.22); }
+    .event-card { position: relative; z-index: 1; background: rgba(255,255,255,.92); color: var(--ink); border-radius: 28px; padding: 24px; box-shadow: 0 25px 60px rgba(0,0,0,.22); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px; }
+    .tag { padding: 7px 10px; border-radius: 999px; background: rgba(143,174,155,.18); color: var(--forest); font-weight: 800; font-size: .78rem; }
+    .demo-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; }
+    .demo-copy p { color: rgba(255,255,255,.78); line-height: 1.72; margin-top: 16px; }
+    .source-note { margin-top: 18px; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.78); line-height: 1.55; font-size: .92rem; }
+    .real-events-panel { grid-template-columns: 1.35fr .65fr; align-items: stretch; }
+    .real-event-card { max-height: 720px; overflow: hidden; display: flex; flex-direction: column; }
+    .event-table-head { display: grid; grid-template-columns: 118px 1.05fr 1.35fr .8fr .9fr; gap: 10px; align-items: center; padding: 12px 14px; border-radius: 16px; background: var(--forest); color: white; font-size: .74rem; font-weight: 900; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
+    .real-event-list { display: grid; gap: 9px; overflow: auto; padding-right: 5px; scrollbar-width: thin; }
+    .event-row { display: grid; grid-template-columns: 118px 1.05fr 1.35fr .8fr .9fr; gap: 10px; align-items: stretch; padding: 11px 12px; border-radius: 16px; background: rgba(243,223,191,.36); border: 1px solid rgba(24,63,54,.08); font-size: .84rem; }
+    .event-date { font-weight: 900; color: var(--forest); white-space: nowrap; }
+    .event-main strong { display: block; letter-spacing: -.02em; margin-bottom: 3px; }
+    .event-main span { display: inline-flex; padding: 4px 8px; border-radius: 999px; background: rgba(143,174,155,.23); color: var(--forest); font-weight: 850; font-size: .72rem; }
+    .event-type { color: var(--muted); line-height: 1.35; }
+    .event-fill { min-height: 34px; border: 1.5px dashed rgba(13,107,85,.24); border-radius: 12px; background: rgba(255,255,255,.35); color: rgba(13,107,85,.72); padding: 8px; line-height: 1.25; }
+    .event-fill em { font-style: normal; font-weight: 800; font-size: .76rem; }
+    footer { position: relative; z-index: 2; padding: 44px 24px 64px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; border-top: 1px solid rgba(24,63,54,.12); padding-top: 24px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 1100px) { .problem-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 920px) { .nav-links { display: none; } .hero, .solution-band, .knowledge, .demo-panel { grid-template-columns: 1fr; } .forms-grid, .ecosystem { grid-template-columns: repeat(2, 1fr); } .hero-card { min-height: 500px; } }
+    @media (max-width: 620px) { .problem-grid, .knowledge-grid, .forms-grid, .ecosystem { grid-template-columns: 1fr; } .section-head { display: block; } .section-note { margin-top: 18px; } .hero { padding-top: 56px; } h1 { font-size: 3.3rem; } .mini-panel { grid-template-columns: 1fr; } .hero-card { min-height: 560px; } .solution-copy, .feature-list, .demo-panel { padding: 28px; } .real-events-panel { grid-template-columns: 1fr; } .event-table-head { display: none; } .event-row { grid-template-columns: 1fr; } .real-event-card { max-height: 760px; } .footer-inner { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <header>
+    <nav class="nav">
+      <a href="#" class="brand" aria-label="JumpLink Romandie home">
+        <span class="brand-mark">♞</span><span>JumpLink Romandie</span>
+      </a>
+      <div class="nav-links" aria-label="Main navigation">
+        <a href="#about">Problem & Solution</a>
+        <a href="#knowledge">Show Jumping 101</a>
+        <a href="#community">Community</a>
+        <a href="#forms">Forms</a>
+        <a href="#demo">Calendar</a>
+      </div>
+      <a class="pill" href="#forms">View forms</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span> Suisse Romande · Show jumping · Community</div>
+        <h1>The equestrian hub of <em>Romandie.</em></h1>
+        <p class="lead">A digital platform designed to reunite riders, organizers, volunteers, sponsors and fans around show jumping events in French-speaking Switzerland.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#about">Explore the concept</a>
+          <a class="btn btn-secondary" href="#forms">View forms</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Illustration of show jumping community platform">
+        <div class="arena">
+          <div class="jump-only"></div>
+          <div class="mini-panel">
+            <div class="mini-tile"><small>Volunteers</small><strong>Sign-up!</strong></div>
+            <div class="mini-tile"><small>Sponsors</small><strong>Get in touch!</strong></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <div><div class="kicker">Problem & Solution</div><h2>The sport is active, but the community feels scattered.</h2></div>
+        <p class="section-note">FER represents equestrian sport in Suisse Romande, while Swiss Equestrian provides national sport calendars and event information. JumpLink builds a bridge between official event data and everyday community needs.</p>
+      </div>
+      <div class="problem-grid">
+        <article class="glass-card"><div class="icon">📅</div><h3>Fragmented information</h3><p>Riders and fans often search across calendars, stable pages, social media posts and word of mouth to know what is happening.</p></article>
+        <article class="glass-card"><div class="icon">🤝</div><h3>Volunteer shortage</h3><p>Horse shows need people for parking, bar, paddock, course crew, timing and hospitality, but recruitment is rarely centralized.</p></article>
+        <article class="glass-card"><div class="icon">✨</div><h3>Community energy</h3><p>Parties, food stands and social evenings make events memorable, but this information is often hard to find before attending.</p></article>
+        <article class="glass-card"><div class="icon">🔎</div><h3>Mysterious sport</h3><p>Show jumping has its own rhythm, codes and vocabulary. To newcomers, it can feel like a closed world; JumpLink makes it more welcoming, readable and easy to join.</p></article>
+      </div>
+      <div class="solution-band">
+        <div class="solution-copy">
+          <div class="kicker" style="color:#ffe1a0;">The solution</div>
+          <h2>A community-first event platform.</h2>
+          <p>JumpLink Romandie presents show jumping events and adds the missing layers: volunteer sign-ups, sponsorship opportunities, social events and organizer visibility.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature-row"><span>01</span> Event calendar</div>
+          <div class="feature-row"><span>02</span> Become an active part of the community</div>
+          <div class="feature-row"><span>03</span> Party, food, bar and community information</div>
+          <div class="feature-row"><span>04</span> Event summaries</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="knowledge">
+      <div class="section-head">
+        <div><div class="kicker">Show Jumping 101</div><h2>Basic knowledge for newcomers.</h2></div>
+        <p class="section-note">The platform should also educate new people entering the sport, so they feel comfortable helping or attending.</p>
+      </div>
+      <div class="knowledge">
+        <aside class="knowledge-visual">
+          <div>
+            <h3>What happens during a jumping show?</h3>
+            <div class="course-map">
+              <div class="course-step"><b>1</b><span>Riders walk the course and memorize the track.</span></div>
+              <div class="course-step"><b>2</b><span>Horse and rider warm up in a separate ring, called "training ring", then enter the arena to complete the course.</span></div>
+              <div class="course-step"><b>3</b><span>Penalties are given for rails down, refusals or time faults.</span></div>
+              <div class="course-step"><b>4</b><span>Clear rounds and fast pace create excitement for the audience.</span></div>
+            </div>
+          </div>
+          <div class="source-note">Education content can be expanded at a later time.</div>
+        </aside>
+        <div class="knowledge-grid">
+          <article class="stat-card"><strong>CS</strong><h3>Concours de Saut</h3><p>In Switzerland, show jumping competitions are often marked as “CS”. They can include regional or national classes depending on the organizer and level.</p></article>
+          <article class="stat-card"><strong>R / N</strong><h3>Competition levels</h3><p>Regional and national categories help structure the sport. In Romandie, FER also supports championships, tours and cups across different categories.</p></article>
+          <article class="stat-card"><strong>4 pts</strong><h3>Common penalty</h3><p>A rail knocked down or a refusal commonly adds faults. This makes the sport easy to follow: clear, accurate and fast rounds are rewarded.</p></article>
+          <article class="stat-card"><strong>Team</strong><h3>Behind the scenes</h3><p>Every show depends on volunteers, sponsors, course builders, stewards, judges, riders, grooms and families. JumpLink makes that invisible ecosystem visible.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="community">
+      <div class="section-head">
+        <div><div class="kicker">Platform ecosystem</div><h2>Designed for every person around the arena.</h2></div>
+        <p class="section-note">The website is not only a calendar. It is a bridge between sport, organization, social life and local support.</p>
+      </div>
+      <div class="ecosystem">
+        <article class="eco-card"><div class="num">01</div><h3>Riders & families</h3><p>Find upcoming shows, locations, schedules, practical details and the social atmosphere around the event.</p></article>
+        <article class="eco-card"><div class="num">02</div><h3>Volunteers</h3><p>Apply to help with clear roles, time slots and expectations before arriving on site.</p></article>
+        <article class="eco-card"><div class="num">03</div><h3>Sponsors</h3><p>Discover local events to support and connect with organizers through a structured inquiry form.</p></article>
+        <article class="eco-card"><div class="num">04</div><h3>Organizers</h3><p>Increase visibility, recruit help, promote sponsors and make each show feel like a community moment.</p></article>
+      </div>
+    </section>
+
+    <section id="forms">
+      <div class="section-head">
+        <div><div class="kicker">Google Form placeholders</div><h2>Ready to connect people once the forms are live.</h2></div>
+      </div>
+      <div class="forms-wrap">
+        <div class="forms-grid">
+          <article class="form-card">
+            <div><h3>Volunteer application</h3><p>For people who want to help at an event: availability, preferred role, experience, canton and contact details.</p></div>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeCeAcnUHSXdtz3XlxjxGvJsViFv7zXL3c7u9tLRI9tWwPlIQ/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Join the team!</a>
+          </article>
+          <article class="form-card">
+            <div><h3>Sponsor inquiry</h3><p>For brands, local businesses and private sponsors interested in visibility, hospitality or prize support.</p></div>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScDOmRIpiF-q-GCFRRvg-z3T0cUDJckjnC_yz8ML0i4ChScVA/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Join the team!</a>
+          </article>
+          <article class="form-card">
+            <div><h3>Organizer submission</h3><p>For stables and clubs to submit event details, party information, volunteer needs and sponsor packages.</p></div>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScfLZma_Lg8zpcBRxiu_e9SmIG-BMqLkGHo7F7cCr61iIBtMQ/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Organizers</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="section-head">
+        <div><div class="kicker">Event map · 2026</div><h2>Where are the shows happening?</h2></div>
+        <p class="section-note">Click any pin to see event details. Numbers show how many competitions are held at the same venue during the season.</p>
+      </div>
+
+      <div class="map-wrap">
+        <svg id="ch-svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" aria-label="Interactive map of show jumping events in Suisse Romande 2026">
+          <text class="map-loading" x="400" y="250" text-anchor="middle">Loading map…</text>
+        </svg>
+        <div class="map-legend">
+          <div class="map-legend-item"><div class="map-legend-dot" style="background:#D85A30"></div>Named championship</div>
+          <div class="map-legend-item"><div class="map-legend-dot" style="background:#0F6E56"></div>Regional competition</div>
+        </div>
+        <div id="map-popup"></div>
+      </div>
+
+      <div class="demo-panel real-events-panel">
+        <div class="event-card real-event-card">
+          <p class="pill" style="display:inline-flex;">Event list prototype</p>
+          <div class="tag-row">
+            <span class="tag">Suisse Romande</span>
+            <span class="tag">Show jumping</span>
+            <span class="tag">2026 calendar</span>
+            <span class="tag">To be completed</span>
+          </div>
+          <div class="event-table-head">
+            <span>Date</span><span>Place</span><span>Event type</span><span>Party info</span><span>Volunteer needed</span>
+          </div>
+          <div class="real-event-list">
+            <div class="event-row"><div class="event-date">28-31.05.2026</div><div class="event-main"><strong>Crête - Vandoeuvres</strong><span>GE</span></div><div class="event-type">Qualifying stage for the Swiss Elite Jumping Championship series</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">04-07.06.2026</div><div class="event-main"><strong>Crête - Vandoeuvres</strong><span>GE</span></div><div class="event-type">Geneva National Championship</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">12–14.06.2026</div><div class="event-main"><strong>Estavayer-le-Lac</strong><span>FR</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">18–21.06.2026</div><div class="event-main"><strong>Payerne</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">19–21.06.2026</div><div class="event-main"><strong>Signy</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">21–22.06.2026</div><div class="event-main"><strong>Corcelles</strong><span>NE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">28.06.2026</div><div class="event-main"><strong>Corcelles</strong><span>NE</span></div><div class="event-type">Qualifying stage for the Swiss Elite Jumping Championship series</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">03-05.07.2026</div><div class="event-main"><strong>Apples</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">04-05.07.2026</div><div class="event-main"><strong>La Chaux-de-Fonds</strong><span>NE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">10-12.07.2026</div><div class="event-main"><strong>Chalet-à-Gobet</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">10-12.07.2026</div><div class="event-main"><strong>Lignières</strong><span>NE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">10-12.07.2026</div><div class="event-main"><strong>Jussy</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">17-19.07.2026</div><div class="event-main"><strong>Yverdon-les-Bains</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">22.07-02.08.2026</div><div class="event-main"><strong>Chalet-à-Gobet</strong><span>VD</span></div><div class="event-type">Swiss Championships</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">07–09.08.2026</div><div class="event-main"><strong>Avully</strong><span>GE</span></div><div class="event-type">Romand Regional and National Championship.</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">14-16.08.2026</div><div class="event-main"><strong>Saignelégier</strong><span>JU</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">15-16.08.2026</div><div class="event-main"><strong>Dompierre</strong><span>FR</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">20-23.08.2026</div><div class="event-main"><strong>La Chaux-de-Fonds</strong><span>NE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">21-23.08.2026</div><div class="event-main"><strong>Poliez-le-Grand</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">28-30.08.2026</div><div class="event-main"><strong>Bassin</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">05-06.09.2026</div><div class="event-main"><strong>Lausanne</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">05-06.09.2026</div><div class="event-main"><strong>Plaffeien</strong><span>FR</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">09-13.09.2026</div><div class="event-main"><strong>Sion</strong><span>VS</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">10.09.2026</div><div class="event-main"><strong>Vandoeuvres</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">17-20.09.2026</div><div class="event-main"><strong>Avenches</strong><span>VD</span></div><div class="event-type">Swiss Championships for Young Horses</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">18-20.09.2026</div><div class="event-main"><strong>Vandoeuvres</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">19-21.09.2026</div><div class="event-main"><strong>Yverdon-les-Bains</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">15-27.09.2026</div><div class="event-main"><strong>Vandoeuvres</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">02-04.10.2026</div><div class="event-main"><strong>Dompierre</strong><span>FR</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">03-04.10.2026</div><div class="event-main"><strong>Yverdon-les-Bains</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">09-11.10.2026</div><div class="event-main"><strong>Russin</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">10-11.10.2026</div><div class="event-main"><strong>Malapalud</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">16-18.10.2026</div><div class="event-main"><strong>Russin</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">24-25.10.2026</div><div class="event-main"><strong>Yverdon-les-Bains</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">31.10-01.11.2026</div><div class="event-main"><strong>Yverdon-les-Bains</strong><span>VD</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">14.11.2026</div><div class="event-main"><strong>Corminboeuf</strong><span>FR</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+            <div class="event-row"><div class="event-date">09-12.12.2026</div><div class="event-main"><strong>Genève</strong><span>GE</span></div><div class="event-type">&nbsp;</div><div class="event-fill"><em>Party info:</em></div><div class="event-fill"><em>Volunteer needed:</em></div></div>
+          </div>
+        </div>
+        <div class="demo-copy">
+          <div class="kicker" style="color:#ffe1a0;">Live demo idea</div>
+          <h2>A real event list, ready to be enriched by the community.</h2>
+          <p>This prototype uses the calendar information from the list and leaves space for the details that are usually missing: party information and the type of volunteers needed. These fields can be filled in later by organizers.</p>
+          <div class="source-note">The goal is to keep the official event information clear, while adding community details that make each show easier to discover, support and attend.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <p><strong>JumpLink Romandie</strong> · A GEN AI class prototype</p>
+      <p>No personal email displayed · Form links to be added later</p>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+  <script>
+  (function(){
+    var EVENTS = [
+      {place:"Vandoeuvres",canton:"GE",dates:"28-31 May",type:"Qualifying - Swiss Elite Championship",named:true,lat:46.195,lng:6.211},
+      {place:"Vandoeuvres",canton:"GE",dates:"4-7 Jun",type:"Geneva National Championship",named:true,lat:46.195,lng:6.211},
+      {place:"Estavayer-le-Lac",canton:"FR",dates:"12-14 Jun",type:"Regional competition",named:false,lat:46.851,lng:6.847},
+      {place:"Payerne",canton:"VD",dates:"18-21 Jun",type:"Regional competition",named:false,lat:46.821,lng:6.941},
+      {place:"Signy",canton:"VD",dates:"19-21 Jun",type:"Regional competition",named:false,lat:46.494,lng:6.347},
+      {place:"Corcelles",canton:"NE",dates:"21-22 Jun",type:"Regional competition",named:false,lat:46.988,lng:6.888},
+      {place:"Corcelles",canton:"NE",dates:"28 Jun",type:"Qualifying - Swiss Elite Championship",named:true,lat:46.988,lng:6.888},
+      {place:"Apples",canton:"VD",dates:"3-5 Jul",type:"Regional competition",named:false,lat:46.545,lng:6.385},
+      {place:"La Chaux-de-Fonds",canton:"NE",dates:"4-5 Jul",type:"Regional competition",named:false,lat:47.097,lng:6.826},
+      {place:"Chalet-a-Gobet",canton:"VD",dates:"10-12 Jul",type:"Regional competition",named:false,lat:46.577,lng:6.683},
+      {place:"Lignieres",canton:"NE",dates:"10-12 Jul",type:"Regional competition",named:false,lat:47.084,lng:7.064},
+      {place:"Jussy",canton:"GE",dates:"10-12 Jul",type:"Regional competition",named:false,lat:46.237,lng:6.255},
+      {place:"Yverdon-les-Bains",canton:"VD",dates:"17-19 Jul",type:"Regional competition",named:false,lat:46.778,lng:6.641},
+      {place:"Chalet-a-Gobet",canton:"VD",dates:"22 Jul-2 Aug",type:"Swiss Championships",named:true,lat:46.577,lng:6.683},
+      {place:"Avully",canton:"GE",dates:"7-9 Aug",type:"Romand Regional & National Championship",named:true,lat:46.178,lng:6.094},
+      {place:"Saignelegier",canton:"JU",dates:"14-16 Aug",type:"Regional competition",named:false,lat:47.256,lng:6.993},
+      {place:"Dompierre",canton:"FR",dates:"15-16 Aug",type:"Regional competition",named:false,lat:46.832,lng:6.983},
+      {place:"La Chaux-de-Fonds",canton:"NE",dates:"20-23 Aug",type:"Regional competition",named:false,lat:47.097,lng:6.826},
+      {place:"Poliez-le-Grand",canton:"VD",dates:"21-23 Aug",type:"Regional competition",named:false,lat:46.628,lng:6.682},
+      {place:"Bassin",canton:"VD",dates:"28-30 Aug",type:"Regional competition",named:false,lat:46.543,lng:6.308},
+      {place:"Lausanne",canton:"VD",dates:"5-6 Sep",type:"Regional competition",named:false,lat:46.519,lng:6.633},
+      {place:"Plaffeien",canton:"FR",dates:"5-6 Sep",type:"Regional competition",named:false,lat:46.745,lng:7.274},
+      {place:"Sion",canton:"VS",dates:"9-13 Sep",type:"Regional competition",named:false,lat:46.233,lng:7.360},
+      {place:"Vandoeuvres",canton:"GE",dates:"10 Sep",type:"Regional competition",named:false,lat:46.195,lng:6.211},
+      {place:"Avenches",canton:"VD",dates:"17-20 Sep",type:"Swiss Championships - Young Horses",named:true,lat:46.879,lng:7.042},
+      {place:"Vandoeuvres",canton:"GE",dates:"18-20 Sep",type:"Regional competition",named:false,lat:46.195,lng:6.211},
+      {place:"Yverdon-les-Bains",canton:"VD",dates:"19-21 Sep",type:"Regional competition",named:false,lat:46.778,lng:6.641},
+      {place:"Vandoeuvres",canton:"GE",dates:"15-27 Sep",type:"Regional competition",named:false,lat:46.195,lng:6.211},
+      {place:"Dompierre",canton:"FR",dates:"2-4 Oct",type:"Regional competition",named:false,lat:46.832,lng:6.983},
+      {place:"Yverdon-les-Bains",canton:"VD",dates:"3-4 Oct",type:"Regional competition",named:false,lat:46.778,lng:6.641},
+      {place:"Russin",canton:"GE",dates:"9-11 Oct",type:"Regional competition",named:false,lat:46.175,lng:6.063},
+      {place:"Malapalud",canton:"VD",dates:"10-11 Oct",type:"Regional competition",named:false,lat:46.784,lng:6.621},
+      {place:"Russin",canton:"GE",dates:"16-18 Oct",type:"Regional competition",named:false,lat:46.175,lng:6.063},
+      {place:"Yverdon-les-Bains",canton:"VD",dates:"24-25 Oct",type:"Regional competition",named:false,lat:46.778,lng:6.641},
+      {place:"Yverdon-les-Bains",canton:"VD",dates:"31 Oct-1 Nov",type:"Regional competition",named:false,lat:46.778,lng:6.641},
+      {place:"Corminboeuf",canton:"FR",dates:"14 Nov",type:"Regional competition",named:false,lat:46.782,lng:7.109},
+      {place:"Geneve",canton:"GE",dates:"9-12 Dec",type:"Regional competition",named:false,lat:46.204,lng:6.143}
+    ];
+
+    var ROMANDE = {GE:1,VD:1,NE:1,FR:1,VS:1,JU:1,BE:1};
+    var W = 800, H = 500;
+    var svg = d3.select("#ch-svg");
+    var TOPO_URL = "https://cdn.jsdelivr.net/npm/swiss-maps@4/2021/ch-combined.json";
+
+    function abbrFromName(name){
+      var map = {
+        "Z\u00fcrich":"ZH","Bern":"BE","Berne":"BE","Luzern":"LU","Uri":"UR","Schwyz":"SZ",
+        "Obwalden":"OW","Nidwalden":"NW","Glarus":"GL","Zug":"ZG","Fribourg":"FR","Freiburg":"FR",
+        "Solothurn":"SO","Basel-Stadt":"BS","Basel-Landschaft":"BL","Schaffhausen":"SH",
+        "Appenzell Ausserrhoden":"AR","Appenzell Innerrhoden":"AI","St. Gallen":"SG","St.Gallen":"SG",
+        "Graub\u00fcnden":"GR","Aargau":"AG","Thurgau":"TG","Ticino":"TI","Tessin":"TI",
+        "Vaud":"VD","Waadt":"VD","Valais":"VS","Wallis":"VS","Neuch\u00e2tel":"NE","Neuenburg":"NE",
+        "Gen\u00e8ve":"GE","Genf":"GE","Geneva":"GE","Jura":"JU"
+      };
+      return map[name] || "";
+    }
+
+    function render(geo){
+      svg.selectAll("*").remove();
+      var proj = d3.geoMercator().fitExtent([[10,10],[W-10,H-10]], geo);
+      var path = d3.geoPath(proj);
+
+      // Cantons
+      svg.append("g").selectAll("path")
+        .data(geo.features).join("path")
+        .attr("d", path)
+        .attr("class", function(d){
+          var ab = (d.properties && (d.properties.abbr || abbrFromName(d.properties.name || d.properties.NAME || ""))) || "";
+          return "canton-path " + (ROMANDE[ab] ? "romande" : "other");
+        });
+
+      // Group events by location
+      var groups = {};
+      EVENTS.forEach(function(e){
+        var k = e.lat.toFixed(3)+","+e.lng.toFixed(3);
+        if(!groups[k]) groups[k] = [];
+        groups[k].push(e);
+      });
+
+      var pinsG = svg.append("g");
+      Object.keys(groups).forEach(function(k){
+        var evts = groups[k];
+        var xy = proj([evts[0].lng, evts[0].lat]);
+        if(!xy) return;
+        var cx = xy[0], cy = xy[1];
+        var hasNamed = evts.some(function(e){return e.named;});
+        var count = evts.length;
+        var fill = hasNamed ? "#D85A30" : "#0F6E56";
+        var r = count > 1 ? 11 : 8.5;
+
+        var g = pinsG.append("g").attr("class","map-pin")
+          .attr("transform","translate("+cx+","+cy+")")
+          .on("click", function(){ showPopup(evts); });
+
+        var c = g.append("circle").attr("r", r).attr("fill", fill)
+          .attr("stroke","#fff").attr("stroke-width", 2);
+
+        g.on("mouseenter", function(){ c.attr("fill", hasNamed ? "#712B13" : "#085041"); })
+         .on("mouseleave", function(){ c.attr("fill", fill); });
+
+        if(count > 1){
+          g.append("text").attr("text-anchor","middle").attr("dominant-baseline","central")
+            .attr("fill","#fff").attr("font-size","10").attr("font-weight","700")
+            .attr("font-family","Inter,sans-serif").attr("pointer-events","none").text(count);
+        }
+      });
+    }
+
+    function showPopup(evts){
+      var popup = document.getElementById("map-popup");
+      var rows = evts.map(function(e){
+        return '<div class="popup-row"><div class="popup-date-box">' + e.dates + '</div>' +
+          '<div><div class="popup-type">' + e.type + '</div>' +
+          '<span class="popup-badge ' + (e.named ? 'named' : '') + '">' + e.canton + (e.named ? ' &middot; Championship' : '') + '</span></div></div>';
+      }).join("");
+      popup.innerHTML = '<div class="popup-card">' +
+        '<button class="popup-close" onclick="document.getElementById(\'map-popup\').innerHTML=\'\'" aria-label="Close">&times;</button>' +
+        '<div class="popup-place">' + evts[0].place + '</div>' +
+        '<div class="popup-count">' + evts.length + ' event' + (evts.length > 1 ? 's' : '') + ' in 2026</div>' +
+        '<div class="popup-events">' + rows + '</div></div>';
+      popup.scrollIntoView({behavior:"smooth", block:"nearest"});
+    }
+
+    // Try accurate geometry from CDN; if it fails, draw a simple fallback.
+    function loadMap(){
+      if (typeof d3 === "undefined" || typeof topojson === "undefined"){ fallback(); return; }
+      fetch(TOPO_URL)
+        .then(function(r){ if(!r.ok) throw new Error("http"); return r.json(); })
+        .then(function(topo){
+          var key = topo.objects.cantons ? "cantons" : Object.keys(topo.objects)[0];
+          var geo = topojson.feature(topo, topo.objects[key]);
+          render(geo);
+        })
+        .catch(function(){ fallback(); });
+    }
+
+    function fallback(){
+      // Minimal inline outline so the section never looks broken offline.
+      svg.selectAll("*").remove();
+      svg.append("rect").attr("x",0).attr("y",0).attr("width",W).attr("height",H).attr("fill","#f6f4ee").attr("rx",16);
+      svg.append("text").attr("x",W/2).attr("y",H/2-8).attr("text-anchor","middle")
+        .attr("class","map-loading").text("Map needs an internet connection to load.");
+      svg.append("text").attr("x",W/2).attr("y",H/2+16).attr("text-anchor","middle")
+        .attr("class","map-loading").attr("font-size","12").text("The event list below works offline.");
+    }
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+      setTimeout(loadMap, 50);
+    } else {
+      document.addEventListener("DOMContentLoaded", loadMap);
+    }
+  })();
+  </script>
+</body>
+</html>    }
 
     a { color: inherit; text-decoration: none; }
 
