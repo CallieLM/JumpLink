@@ -34,6 +34,11 @@
     .nav-links a { transition: color .2s; }
     .nav-links a:hover { color: var(--forest); }
     .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(24,63,54,.16); background: rgba(255,255,255,.55); color: var(--forest); border-radius: 999px; padding: 10px 15px; font-size: .86rem; font-weight: 750; box-shadow: 0 10px 30px rgba(24,63,54,.07); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .language-switch { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border: 1px solid rgba(24,63,54,.16); background: rgba(255,255,255,.55); border-radius: 999px; box-shadow: 0 10px 30px rgba(24,63,54,.07); }
+    .lang-btn { border: none; background: transparent; color: var(--muted); border-radius: 999px; padding: 7px 10px; font-size: .78rem; font-weight: 900; cursor: pointer; transition: background .2s, color .2s; }
+    .lang-btn.active { background: linear-gradient(135deg, var(--forest), var(--emerald)); color: white; }
     .hero { position: relative; z-index: 2; max-width: var(--max); margin: 0 auto; padding: 86px 24px 58px; display: grid; grid-template-columns: 1.06fr .94fr; gap: 46px; align-items: center; }
     .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 9px 14px; border: 1px solid rgba(24,63,54,.14); border-radius: 999px; background: rgba(255,255,255,.62); color: var(--emerald); font-weight: 800; font-size: .84rem; margin-bottom: 22px; }
     .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 7px rgba(214,168,63,.15); }
@@ -51,21 +56,21 @@
     .jump-only { position: absolute; left: 12%; right: 12%; top: 42%; height: 12px; border-radius: 999px; background: linear-gradient(90deg, #fff8ea 0 14%, var(--gold) 14% 28%, #fff8ea 28% 42%, var(--coral) 42% 56%, #fff8ea 56% 70%, var(--gold) 70% 84%, #fff8ea 84%); box-shadow: 0 34px 0 #fff8ea, 0 68px 0 rgba(214,168,63,.96), 0 102px 0 rgba(255,248,234,.92); }
     .jump-only:before, .jump-only:after { content: ""; position: absolute; top: -92px; width: 18px; height: 230px; border-radius: 999px; background: linear-gradient(180deg, #fff8ea, #f3dfbf); box-shadow: 0 0 0 7px rgba(255,255,255,.08); }
     .jump-only:before { left: 26px; } .jump-only:after { right: 26px; }
-    .mini-panel { position: absolute; left: 32px; right: 32px; bottom: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .mini-tile { background: rgba(255,248,234,.92); border: 1px solid rgba(255,255,255,.75); border-radius: 20px; padding: 18px; box-shadow: 0 18px 40px rgba(0,0,0,.14); }
-    .mini-tile small { display: block; color: var(--muted); font-weight: 750; margin-bottom: 6px; }
-    .mini-tile strong { font-size: 1.2rem; letter-spacing: -.03em; color: var(--forest); }
+    .mini-panel { position: absolute; left: 32px; right: 32px; bottom: 34px; display: grid; gap: 12px; }
+    .hero-message { background: rgba(255,248,234,.92); border: 1px solid rgba(255,255,255,.75); border-radius: 24px; padding: 22px 24px; box-shadow: 0 18px 40px rgba(0,0,0,.14); color: var(--forest); font-weight: 780; font-size: 1.08rem; line-height: 1.55; letter-spacing: -.01em; }
     section { position: relative; z-index: 2; max-width: var(--max); margin: 0 auto; padding: 74px 24px; }
     .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; }
+    .about-head { display: block; }
     .kicker { text-transform: uppercase; letter-spacing: .18em; color: var(--emerald); font-size: .76rem; font-weight: 900; margin-bottom: 12px; }
     h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.25rem, 4.8vw, 4rem); line-height: .95; letter-spacing: -.055em; max-width: 760px; }
     .section-note { max-width: 400px; color: var(--muted); line-height: 1.7; }
+    .fer-note { max-width: 760px; font-size: .98rem; line-height: 1.65; margin-top: 18px; }
     .problem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
     .glass-card { background: rgba(255,255,255,.62); border: 1px solid rgba(24,63,54,.1); border-radius: var(--radius-lg); padding: 26px; box-shadow: 0 16px 45px rgba(24,63,54,.08); }
     .glass-card .icon { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 17px; background: linear-gradient(135deg, rgba(143,174,155,.35), rgba(214,168,63,.32)); margin-bottom: 18px; font-size: 1.35rem; }
     .glass-card h3 { font-size: 1.18rem; margin-bottom: 10px; letter-spacing: -.03em; }
     .glass-card p { color: var(--muted); line-height: 1.68; }
-    .solution-band { margin-top: 22px; border-radius: var(--radius-xl); overflow: hidden; background: linear-gradient(135deg, rgba(24,63,54,.96), rgba(13,107,85,.92)), radial-gradient(circle at 20% 20%, rgba(214,168,63,.5), transparent 30rem); color: white; display: grid; grid-template-columns: 1fr 1fr; box-shadow: var(--shadow); }
+    .solution-band { margin-top: 22px; border-radius: var(--radius-xl); overflow: hidden; background: linear-gradient(135deg, rgba(24,63,54,.96), rgba(13,107,85,.92)), radial-gradient(circle at 20% 20%, rgba(214,168,63,.5), transparent 30rem); color: white; display: grid; grid-template-columns: 1fr; box-shadow: var(--shadow); }
     .solution-copy { padding: 42px; }
     .solution-copy p { margin-top: 16px; color: rgba(255,255,255,.78); line-height: 1.72; font-size: 1.02rem; }
     .feature-list { padding: 42px; background: rgba(255,255,255,.08); display: grid; gap: 13px; }
@@ -83,6 +88,13 @@
     .stat-card strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; letter-spacing: -.05em; color: var(--emerald); margin-bottom: 10px; }
     .stat-card h3 { margin-bottom: 10px; letter-spacing: -.03em; }
     .stat-card p { color: var(--muted); line-height: 1.65; }
+
+    .goal-card { grid-column: span 2; min-height: 145px; }
+    .goal-card strong { font-size: 1.55rem; margin-bottom: 12px; }
+    .goal-card p { max-width: 760px; }
+    .knowledge-with-note { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+    .team-note { margin-top: 4px; color: var(--muted); line-height: 1.7; font-size: .94rem; max-width: 300px; }
+    .team-note strong { display: block; color: var(--forest); font-size: .98rem; margin-bottom: 6px; letter-spacing: -.02em; }
     .ecosystem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     .eco-card { padding: 25px; min-height: 235px; border-radius: var(--radius-lg); color: white; position: relative; overflow: hidden; box-shadow: 0 22px 50px rgba(24,63,54,.14); }
     .eco-card:before { content: ""; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,.13); right: -70px; top: -60px; }
@@ -94,7 +106,9 @@
     .eco-card h3 { position: relative; z-index: 1; margin-bottom: 10px; font-size: 1.2rem; letter-spacing: -.03em; }
     .eco-card p { position: relative; z-index: 1; color: rgba(255,255,255,.78); line-height: 1.62; }
     .forms-wrap { border-radius: 42px; padding: 28px; background: linear-gradient(145deg, rgba(255,255,255,.68), rgba(255,255,255,.28)), radial-gradient(circle at 10% 10%, rgba(214,168,63,.28), transparent 22rem); border: 1px solid rgba(255,255,255,.64); box-shadow: var(--shadow); }
-    .forms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .forms-head { display: block; }
+    .forms-head .section-note { margin-top: 18px; max-width: 760px; }
+    .forms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
     .form-card { background: rgba(255,248,234,.76); border: 1px solid rgba(24,63,54,.12); border-radius: 26px; padding: 26px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; }
     .form-card h3 { font-size: 1.34rem; letter-spacing: -.04em; margin-bottom: 12px; }
     .form-card p { color: var(--muted); line-height: 1.65; }
@@ -142,8 +156,8 @@
     footer { position: relative; z-index: 2; padding: 44px 24px 64px; }
     .footer-inner { max-width: var(--max); margin: 0 auto; border-top: 1px solid rgba(24,63,54,.12); padding-top: 24px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: .92rem; }
     @media (max-width: 1100px) { .problem-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 920px) { .nav-links { display: none; } .hero, .solution-band, .knowledge, .demo-panel { grid-template-columns: 1fr; } .forms-grid, .ecosystem { grid-template-columns: repeat(2, 1fr); } .hero-card { min-height: 500px; } }
-    @media (max-width: 620px) { .problem-grid, .knowledge-grid, .forms-grid, .ecosystem { grid-template-columns: 1fr; } .section-head { display: block; } .section-note { margin-top: 18px; } .hero { padding-top: 56px; } h1 { font-size: 3.3rem; } .mini-panel { grid-template-columns: 1fr; } .hero-card { min-height: 560px; } .solution-copy, .feature-list, .demo-panel { padding: 28px; } .real-events-panel { grid-template-columns: 1fr; } .event-table-head { display: none; } .event-row { grid-template-columns: 1fr; } .real-event-card { max-height: 760px; } .footer-inner { flex-direction: column; } }
+    @media (max-width: 920px) { .nav-links { display: none; } .hero, .solution-band, .knowledge, .knowledge-with-note, .demo-panel { grid-template-columns: 1fr; } .forms-grid, .ecosystem { grid-template-columns: repeat(2, 1fr); } .hero-card { min-height: 500px; } }
+    @media (max-width: 620px) { .nav { flex-wrap: wrap; } .nav-actions { width: 100%; justify-content: space-between; } .problem-grid, .knowledge-grid, .forms-grid, .ecosystem { grid-template-columns: 1fr; } .goal-card { grid-column: span 1; } .section-head { display: block; } .section-note { margin-top: 18px; } .hero { padding-top: 56px; } h1 { font-size: 3.3rem; } .mini-panel { grid-template-columns: 1fr; } .hero-card { min-height: 560px; } .solution-copy, .feature-list, .demo-panel { padding: 28px; } .real-events-panel { grid-template-columns: 1fr; } .event-table-head { display: none; } .event-row { grid-template-columns: 1fr; } .real-event-card { max-height: 760px; } .footer-inner { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -156,11 +170,16 @@
       <div class="nav-links" aria-label="Main navigation">
         <a href="#about">Problem & Solution</a>
         <a href="#knowledge">Show Jumping 101</a>
-        <a href="#community">Community</a>
         <a href="#forms">Forms</a>
         <a href="#demo">Calendar</a>
       </div>
-      <a class="pill" href="#forms">View forms</a>
+      <div class="nav-actions">
+        <div class="language-switch" aria-label="Language selector">
+          <button class="lang-btn active" type="button" data-lang="en">EN</button>
+          <button class="lang-btn" type="button" data-lang="fr">FR</button>
+        </div>
+        <a class="pill" href="#forms">View forms</a>
+      </div>
     </nav>
   </header>
   <main>
@@ -168,7 +187,6 @@
       <div class="hero-copy">
         <div class="eyebrow"><span></span> Suisse Romande · Show jumping · Community</div>
         <h1>The equestrian hub of <em>Romandie.</em></h1>
-        <p class="lead">A digital platform designed to reunite riders, organizers, volunteers, sponsors and fans around show jumping events in French-speaking Switzerland.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#about">Explore the concept</a>
           <a class="btn btn-secondary" href="#forms">View forms</a>
@@ -178,17 +196,19 @@
         <div class="arena">
           <div class="jump-only"></div>
           <div class="mini-panel">
-            <div class="mini-tile"><small>Volunteers</small><strong>Sign-up!</strong></div>
-            <div class="mini-tile"><small>Sponsors</small><strong>Get in touch!</strong></div>
+            <div class="hero-message">A digital platform designed to reunite riders, organizers, volunteers, sponsors and fans around show jumping events in French-speaking Switzerland.</div>
           </div>
         </div>
       </aside>
     </section>
 
     <section id="about">
-      <div class="section-head">
-        <div><div class="kicker">Problem & Solution</div><h2>The sport is active, but the community feels scattered.</h2></div>
-        <p class="section-note">FER represents equestrian sport in Suisse Romande, while Swiss Equestrian provides national sport calendars and event information. JumpLink builds a bridge between official event data and everyday community needs.</p>
+      <div class="section-head about-head">
+        <div>
+          <div class="kicker">Problem & Solution</div>
+          <h2>The sport is active, but the community feels scattered.</h2>
+          <p class="section-note fer-note">Fédération Equestre Romande (FER) supports equestrian sport in Suisse Romande. National Swiss Equestrian Federation (Swiss Equestrian) provides national calendars and event information.</p>
+        </div>
       </div>
       <div class="problem-grid">
         <article class="glass-card"><div class="icon">📅</div><h3>Fragmented information</h3><p>Riders and fans often search across calendars, stable pages, social media posts and word of mouth to know what is happening.</p></article>
@@ -202,58 +222,45 @@
           <h2>A community-first event platform.</h2>
           <p>JumpLink Romandie presents show jumping events and adds the missing layers: volunteer sign-ups, sponsorship opportunities, social events and organizer visibility.</p>
         </div>
-        <div class="feature-list">
-          <div class="feature-row"><span>01</span> Event calendar</div>
-          <div class="feature-row"><span>02</span> Become an active part of the community</div>
-          <div class="feature-row"><span>03</span> Party, food, bar and community information</div>
-          <div class="feature-row"><span>04</span> Event summaries</div>
-        </div>
       </div>
     </section>
 
     <section id="knowledge">
       <div class="section-head">
         <div><div class="kicker">Show Jumping 101</div><h2>Basic knowledge for newcomers.</h2></div>
-        <p class="section-note">The platform should also educate new people entering the sport, so they feel comfortable helping or attending.</p>
+        
       </div>
-      <div class="knowledge">
+      <div class="knowledge-with-note">
+        <div class="knowledge">
         <aside class="knowledge-visual">
           <div>
-            <h3>What happens during a jumping show?</h3>
+            <h3>What happens during a show jumping competition</h3>
             <div class="course-map">
-              <div class="course-step"><b>1</b><span>Riders walk the course and memorize the track.</span></div>
-              <div class="course-step"><b>2</b><span>Horse and rider warm up in a separate ring, called "training ring", then enter the arena to complete the course.</span></div>
-              <div class="course-step"><b>3</b><span>Penalties are given for rails down, refusals or time faults.</span></div>
-              <div class="course-step"><b>4</b><span>Clear rounds and fast pace create excitement for the audience.</span></div>
+              <div class="course-step"><b>1</b><span>Riders have 15 minutes to walk the course and memorize the track.</span></div>
+              <div class="course-step"><b>2</b><span>Horse and rider warm up in a ring called "training ring" where they share some warm up jumps, helped by their trainers.</span></div>
+              <div class="course-step"><b>3</b><span>The horse and rider combination enters the main arena to complete the course.</span></div>
+              <div class="course-step"><b>4</b><span>After jumping, the horses are walked, washed or brushed off so that they recover in optimal conditions.</span></div>
+              <div class="course-step"><b>5</b><span>The best competitors come back in the main arena for the prize giving ceremony at the end of the class.</span></div>
             </div>
           </div>
-          <div class="source-note">Education content can be expanded at a later time.</div>
+          
         </aside>
         <div class="knowledge-grid">
-          <article class="stat-card"><strong>CS</strong><h3>Concours de Saut</h3><p>In Switzerland, show jumping competitions are often marked as “CS”. They can include regional or national classes depending on the organizer and level.</p></article>
-          <article class="stat-card"><strong>R / N</strong><h3>Competition levels</h3><p>Regional and national categories help structure the sport. In Romandie, FER also supports championships, tours and cups across different categories.</p></article>
-          <article class="stat-card"><strong>4 pts</strong><h3>Common penalty</h3><p>A rail knocked down or a refusal commonly adds faults. This makes the sport easy to follow: clear, accurate and fast rounds are rewarded.</p></article>
-          <article class="stat-card"><strong>Team</strong><h3>Behind the scenes</h3><p>Every show depends on volunteers, sponsors, course builders, stewards, judges, riders, grooms and families. JumpLink makes that invisible ecosystem visible.</p></article>
+          <article class="stat-card"><strong>CS</strong><h3>Concours de Saut</h3><p>In Switzerland, show jumping competitions are often marked as “CS”. They can include regional or national classes.</p></article>
+          <article class="stat-card"><strong>R / N</strong><h3>Competition levels</h3><p>The horse shows are separated in different categories: National, Regional, Brevet and Pony.</p></article>
+          <article class="stat-card goal-card"><strong>How to win?</strong><p>The goal is to be the fastest to complete the course, while leaving all the jumps up. Knocking a rail down, having your horse refuse a jump or completing your course slower than the time allowed, are all events that will lead to added penalties.</p></article>
+        </div>
         </div>
       </div>
     </section>
 
-    <section id="community">
-      <div class="section-head">
-        <div><div class="kicker">Platform ecosystem</div><h2>Designed for every person around the arena.</h2></div>
-        <p class="section-note">The website is not only a calendar. It is a bridge between sport, organization, social life and local support.</p>
-      </div>
-      <div class="ecosystem">
-        <article class="eco-card"><div class="num">01</div><h3>Riders & families</h3><p>Find upcoming shows, locations, schedules, practical details and the social atmosphere around the event.</p></article>
-        <article class="eco-card"><div class="num">02</div><h3>Volunteers</h3><p>Apply to help with clear roles, time slots and expectations before arriving on site.</p></article>
-        <article class="eco-card"><div class="num">03</div><h3>Sponsors</h3><p>Discover local events to support and connect with organizers through a structured inquiry form.</p></article>
-        <article class="eco-card"><div class="num">04</div><h3>Organizers</h3><p>Increase visibility, recruit help, promote sponsors and make each show feel like a community moment.</p></article>
-      </div>
-    </section>
-
     <section id="forms">
-      <div class="section-head">
-        <div><div class="kicker">Google Form placeholders</div><h2>Ready to connect people once the forms are live.</h2></div>
+      <div class="section-head forms-head">
+        <div>
+          <div class="kicker">Forms</div>
+          <h2>Ready to connect people.</h2>
+          <p class="section-note">Having the right team is key to every success. Shows depend on volunteers, sponsors, course builders, stewards, judges, riders, grooms and families; all united by the passion and love for horses.</p>
+        </div>
       </div>
       <div class="forms-wrap">
         <div class="forms-grid">
@@ -268,6 +275,10 @@
           <article class="form-card">
             <div><h3>Organizer submission</h3><p>For stables and clubs to submit event details, party information, volunteer needs and sponsor packages.</p></div>
             <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScfLZma_Lg8zpcBRxiu_e9SmIG-BMqLkGHo7F7cCr61iIBtMQ/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Organizers</a>
+          </article>
+          <article class="form-card">
+            <div><h3>Improvement ideas</h3><p>For anyone who would like to share ideas to improve the sport, the platform or just share a comment.</p></div>
+            <a class="form-button" href="#forms">Share ideas</a>
           </article>
         </div>
       </div>
@@ -355,6 +366,35 @@
     </div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script>
+    window.JUMPLINK_LANG = "en";
+    window.JUMPLINK_TRANSLATIONS = {"Problem & Solution": "Problème & Solution", "Show Jumping 101": "Saut d'obstacles 101", "Forms": "Formulaires", "Calendar": "Calendrier", "View forms": "Voir les formulaires", "Suisse Romande · Show jumping · Community": "Suisse Romande · Saut d’obstacles · Communauté", "The equestrian hub of": "Le hub équestre de", "Romandie.": "la Romandie.", "Explore the concept": "Découvrir le concept", "A digital platform designed to reunite riders, organizers, volunteers, sponsors and fans around show jumping events in French-speaking Switzerland.": "Une plateforme digitale pensée pour réunir cavaliers, organisateurs, bénévoles, sponsors et fans autour des concours de saut d’obstacles en Suisse romande.", "The sport is active, but the community feels scattered.": "Le sport est actif, mais la communauté semble dispersée.", "Fédération Equestre Romande (FER) supports equestrian sport in Suisse Romande. National Swiss Equestrian Federation (Swiss Equestrian) provides national calendars and event information.": "La Fédération Equestre Romande (FER) soutient le sport équestre en Suisse romande. La Fédération Suisse Nationale d'Équitation (Swiss Equestrian) fournit les calendriers nationaux et les informations sur les événements.", "Fragmented information": "Information fragmentée", "Riders and fans often search across calendars, stable pages, social media posts and word of mouth to know what is happening.": "Les cavaliers et les fans cherchent souvent dans les calendriers, les pages d’écuries, les réseaux sociaux et le bouche-à-oreille pour savoir ce qui se passe.", "Volunteer shortage": "Manque de bénévoles", "Horse shows need people for parking, bar, paddock, course crew, timing and hospitality, but recruitment is rarely centralized.": "Les concours ont besoin de personnes pour le parking, le bar, le paddock, la piste, le chronométrage et l’accueil, mais le recrutement est rarement centralisé.", "Community energy": "Énergie communautaire", "Parties, food stands and social evenings make events memorable, but this information is often hard to find before attending.": "Les soirées, stands de nourriture et moments conviviaux rendent les concours mémorables, mais ces informations sont souvent difficiles à trouver avant de s’y rendre.", "Mysterious sport": "Un sport mystérieux", "Show jumping has its own rhythm, codes and vocabulary. To newcomers, it can feel like a closed world; JumpLink makes it more welcoming, readable and easy to join.": "Le saut d’obstacles a son propre rythme, ses codes et son vocabulaire. Pour les nouveaux, cela peut sembler être un monde fermé; JumpLink le rend plus accueillant, lisible et facile à rejoindre.", "The solution": "La solution", "A community-first event platform.": "Une plateforme d’événements centrée sur la communauté.", "JumpLink Romandie presents show jumping events and adds the missing layers: volunteer sign-ups, sponsorship opportunities, social events and organizer visibility.": "JumpLink Romandie présente les concours de saut d’obstacles et ajoute les éléments manquants: inscriptions des bénévoles, opportunités de sponsoring, événements sociaux et visibilité pour les organisateurs.", "Basic knowledge for newcomers.": "Les bases pour les nouveaux venus.", "What happens during a show jumping competition": "Que se passe-t-il pendant un concours de saut d’obstacles", "Riders have 15 minutes to walk the course and memorize the track.": "Les cavaliers ont 15 minutes pour reconnaître le parcours et mémoriser le tracé.", "Horse and rider warm up in a ring called \"training ring\" where they share some warm up jumps, helped by their trainers.": "Le cheval et le cavalier s’échauffent dans une carrière appelée \"training ring\", où ils partagent des obstacles d’échauffement avec l’aide de leurs entraîneurs.", "The horse and rider combination enters the main arena to complete the course.": "Le couple cheval-cavalier entre dans la piste principale pour effectuer le parcours.", "After jumping, the horses are walked, washed or brushed off so that they recover in optimal conditions.": "Après le parcours, les chevaux sont marché, lavés ou brossés afin de récupérer dans des conditions optimales.", "The best competitors come back in the main arena for the prize giving ceremony at the end of the class.": "Les meilleurs concurrents reviennent dans la piste principale pour la cérémonie de remise des prix à la fin de l’épreuve.", "In Switzerland, show jumping competitions are often marked as “CS”. They can include regional or national classes.": "En Suisse, les concours de saut d’obstacles sont souvent indiqués par “CS”. Ils peuvent inclure des épreuves régionales ou nationales.", "Competition levels": "Niveaux de compétition", "The horse shows are separated in different categories: National, Regional, Brevet and Pony.": "Les concours hippiques sont séparés en différentes catégories: National, Régional, Brevet et Poney.", "How to win?": "Comment gagner?", "The goal is to be the fastest to complete the course, while leaving all the jumps up. Knocking a rail down, having your horse refuse a jump or completing your course slower than the time allowed, are all events that will lead to added penalties.": "Le but est d’être le plus rapide à terminer le parcours, tout en laissant tous les obstacles en place. Faire tomber une barre, avoir son cheval qui refuse un obstacle ou terminer le parcours plus lentement que le temps autorisé sont tous des événements qui entraînent des pénalités ajoutées.", "Ready to connect people.": "Prêt à connecter les personnes.", "Having the right team is key to every success. Shows depend on volunteers, sponsors, course builders, stewards, judges, riders, grooms and families; all united by the passion and love for horses.": "Avoir la bonne équipe est la clé de chaque réussite. Les concours dépendent des bénévoles, sponsors, chefs de piste, stewards, juges, cavaliers, grooms et familles; tous unis par la passion et l’amour des chevaux.", "Volunteer application": "Inscription bénévole", "For people who want to help at an event: availability, preferred role, experience, canton and contact details.": "Pour les personnes qui souhaitent aider lors d’un événement: disponibilités, rôle préféré, expérience, canton et coordonnées.", "Join the team!": "Rejoindre l’équipe!", "Sponsor inquiry": "Demande de sponsoring", "For brands, local businesses and private sponsors interested in visibility, hospitality or prize support.": "Pour les marques, entreprises locales et sponsors privés intéressés par de la visibilité, de l’hospitalité ou un soutien aux prix.", "Organizer submission": "Soumission organisateur", "For stables and clubs to submit event details, party information, volunteer needs and sponsor packages.": "Pour les écuries et clubs souhaitant transmettre les détails d’un événement, les informations de soirée, les besoins en bénévoles et les offres de sponsoring.", "Organizers": "Organisateurs", "Improvement ideas": "Idées d’amélioration", "For anyone who would like to share ideas to improve the sport, the platform or just share a comment.": "Pour toute personne qui souhaite partager des idées pour améliorer le sport, la plateforme ou simplement laisser un commentaire.", "Share ideas": "Partager des idées", "Event map · 2026": "Carte des événements · 2026", "Where are the shows happening?": "Où ont lieu les concours?", "Click any pin to see event details. Numbers show how many competitions are held at the same venue during the season.": "Cliquez sur une épingle pour voir les détails de l’événement. Les chiffres indiquent le nombre de concours organisés au même lieu pendant la saison.", "Named championship": "Championnat nommé", "Regional competition": "Concours régional", "Event list prototype": "Prototype de liste d’événements", "Show jumping": "Saut d’obstacles", "2026 calendar": "Calendrier 2026", "To be completed": "À compléter", "Place": "Lieu", "Event type": "Type d’événement", "Party info": "Infos soirée", "Volunteer needed": "Bénévoles nécessaires", "Party info:": "Infos soirée:", "Volunteer needed:": "Bénévoles nécessaires:", "Qualifying stage for the Swiss Elite Jumping Championship series": "Étape qualificative pour la série du Championnat Suisse Elite de saut", "Geneva National Championship": "Championnat national de Genève", "Swiss Championships": "Championnats suisses", "Romand Regional and National Championship.": "Championnat romand régional et national.", "Swiss Championships for Young Horses": "Championnats suisses des jeunes chevaux", "Live demo idea": "Idée de démo live", "A real event list, ready to be enriched by the community.": "Une vraie liste d’événements, prête à être enrichie par la communauté.", "This prototype uses the calendar information from the list and leaves space for the details that are usually missing: party information and the type of volunteers needed. These fields can be filled in later by organizers.": "Ce prototype utilise les informations du calendrier de la liste et laisse de la place aux détails qui manquent souvent: les informations de soirée et le type de bénévoles nécessaires. Ces champs pourront être complétés plus tard par les organisateurs.", "The goal is to keep the official event information clear, while adding community details that make each show easier to discover, support and attend.": "L’objectif est de garder les informations officielles claires, tout en ajoutant les détails communautaires qui rendent chaque concours plus facile à découvrir, soutenir et visiter.", "JumpLink Romandie · A GEN AI class prototype": "JumpLink Romandie · Un prototype de cours GEN AI", "No personal email displayed · Form links to be added later": "Aucun e-mail personnel affiché · Liens des formulaires à ajouter plus tard"};
+    function setLanguage(lang) {
+      window.JUMPLINK_LANG = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll(".lang-btn").forEach(function(btn){ btn.classList.toggle("active", btn.dataset.lang === lang); });
+      var translations = window.JUMPLINK_TRANSLATIONS;
+      var reverse = {};
+      Object.keys(translations).forEach(function(key){ reverse[translations[key]] = key; });
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(node){
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement && node.parentElement.closest("script, style")) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(function(node){
+        var text = node.nodeValue.trim();
+        if (lang === "fr" && translations[text]) node.nodeValue = node.nodeValue.replace(text, translations[text]);
+        if (lang === "en" && reverse[text]) node.nodeValue = node.nodeValue.replace(text, reverse[text]);
+      });
+    }
+    document.addEventListener("DOMContentLoaded", function(){
+      document.querySelectorAll(".lang-btn").forEach(function(btn){ btn.addEventListener("click", function(){ setLanguage(btn.dataset.lang); }); });
+    });
+  </script>
   <script>
   (function(){
     var EVENTS = [
