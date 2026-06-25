@@ -76,7 +76,7 @@
     .feature-list { padding: 42px; background: rgba(255,255,255,.08); display: grid; gap: 13px; }
     .feature-row { display: flex; align-items: center; gap: 14px; padding: 15px; border-radius: 18px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.9); font-weight: 750; }
     .feature-row span { color: #ffe1a0; }
-    .knowledge { display: grid; grid-template-columns: .84fr 1.16fr; gap: 22px; align-items: stretch; }
+    .knowledge { display: grid; grid-template-columns: .84fr 1.16fr; gap: 22px; align-items: stretch; width: 100%; }
     .knowledge-visual { border-radius: var(--radius-xl); background: radial-gradient(circle at 20% 25%, rgba(214,168,63,.46), transparent 18rem), linear-gradient(145deg, rgba(24,63,54,.94), rgba(14,75,61,.88)); color: white; padding: 34px; min-height: 480px; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
     .knowledge-visual:after { content: ""; position: absolute; width: 480px; height: 480px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; right: -180px; bottom: -170px; }
     .knowledge-visual h3 { font-family: Georgia, "Times New Roman", serif; font-size: 2.55rem; line-height: .98; letter-spacing: -.05em; max-width: 360px; position: relative; z-index: 1; }
@@ -92,7 +92,7 @@
     .goal-card { grid-column: span 2; min-height: 145px; }
     .goal-card strong { font-size: 1.55rem; margin-bottom: 12px; }
     .goal-card p { max-width: 760px; }
-    .knowledge-with-note { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+    .knowledge-with-note { display: block; width: 100%; }
     .team-note { margin-top: 4px; color: var(--muted); line-height: 1.7; font-size: .94rem; max-width: 300px; }
     .team-note strong { display: block; color: var(--forest); font-size: .98rem; margin-bottom: 6px; letter-spacing: -.02em; }
     .ecosystem { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -266,11 +266,11 @@
         <div class="forms-grid">
           <article class="form-card">
             <div><h3>Volunteer application</h3><p>For people who want to help at an event: availability, preferred role, experience, canton and contact details.</p></div>
-            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeCeAcnUHSXdtz3XlxjxGvJsViFv7zXL3c7u9tLRI9tWwPlIQ/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Join the team!</a>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeCeAcnUHSXdtz3XlxjxGvJsViFv7zXL3c7u9tLRI9tWwPlIQ/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Volunteer Team</a>
           </article>
           <article class="form-card">
             <div><h3>Sponsor inquiry</h3><p>For brands, local businesses and private sponsors interested in visibility, hospitality or prize support.</p></div>
-            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScDOmRIpiF-q-GCFRRvg-z3T0cUDJckjnC_yz8ML0i4ChScVA/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Join the team!</a>
+            <a class="form-button" href="https://docs.google.com/forms/d/e/1FAIpQLScDOmRIpiF-q-GCFRRvg-z3T0cUDJckjnC_yz8ML0i4ChScVA/viewform?embedded=true" target="_blank" rel="noopener noreferrer">Sponsoring</a>
           </article>
           <article class="form-card">
             <div><h3>Organizer submission</h3><p>For stables and clubs to submit event details, party information, volunteer needs and sponsor packages.</p></div>
